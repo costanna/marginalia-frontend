@@ -1,0 +1,34 @@
+// Theme-independent design tokens: space, shape, type, motion.
+:root {
+  // Spacing: 4px base (4, 8, 12, 16, 24, 32, 48, 64).
+  --sp-4: 0.25rem;
+  --sp-8: 0.5rem;
+  --sp-12: 0.75rem;
+  --sp-16: 1rem;
+  --sp-24: 1.5rem;
+  --sp-32: 2rem;
+  --sp-48: 3rem;
+  --sp-64: 4rem;
+
+  // Radii: 8px inputs, 12px cards, 16px panels, pill chips.
+  --radius-input: 8px;
+  --radius-card: 12px;
+  --radius-panel: 16px;
+  --radius-pill: 999px;
+
+  // Type
+  --font-ui: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --text-body: 1rem;
+  --line-body: 1.6;
+  --text-writing: 1.125rem; // the writing area is 18px
+  --line-writing: 1.75;
+
+  // Motion (150 to 200ms; disabled for users who prefer reduced motion, see base.scss).
+  --transition: 150ms ease;
+  --transition-slow: 200ms ease;
+
+  // Focus ring: 2px in the primary colour, 2px away from the element.
+  --focus-ring: 2px solid var(--primary);
+  --focus-offset: 2px;
+}

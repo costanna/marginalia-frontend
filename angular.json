@@ -34,7 +34,10 @@
               "@fontsource-variable/inter/index.css",
               "@fontsource-variable/fraunces/index.css",
               "src/styles.scss"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src"]
+            }
           },
           "configurations": {
             "production": {
