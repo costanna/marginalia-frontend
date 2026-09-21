@@ -90,6 +90,7 @@
     }
   },
   "form": {
+    "showPassword": "Mostrar contraseña",
     "errors": {
       "required": "Este campo es obligatorio.",
       "email": "Escribe un correo electrónico válido.",

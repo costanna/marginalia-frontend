@@ -90,6 +90,7 @@
     }
   },
   "form": {
+    "showPassword": "Mostra la contrasenya",
     "errors": {
       "required": "Aquest camp és obligatori.",
       "email": "Escriu un correu electrònic vàlid.",

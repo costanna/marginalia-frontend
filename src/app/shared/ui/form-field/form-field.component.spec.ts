@@ -178,3 +178,77 @@ describe('FormFieldComponent (multi-line, with counter)', () => {
     expect(el.querySelector('.counter')?.getAttribute('aria-hidden')).toBe('true');
   });
 });
+
+@Component({
+  imports: [FormFieldComponent],
+  template: `<app-form-field [control]="control" label="auth.fields.email" type="email" />`,
+})
+class EmailHost {
+  control = new FormControl('', { nonNullable: true });
+}
+
+describe('FormFieldComponent (password reveal)', () => {
+  const toggle = (el: HTMLElement) => el.querySelector<HTMLButtonElement>('button.reveal')!;
+
+  it('hides the password by default and offers a button to show it', async () => {
+    const { el, input } = await render();
+
+    expect(input().type).toBe('password');
+    expect(toggle(el).getAttribute('aria-label')).toBe('Mostrar contraseña');
+    expect(toggle(el).getAttribute('aria-pressed')).toBe('false');
+    // It is a button inside the form: it must never submit it.
+    expect(toggle(el).type).toBe('button');
+  });
+
+  it('shows the typed text when the button is pressed, and hides it again on a second press', async () => {
+    const { fixture, el, input } = await render();
+
+    toggle(el).click();
+    fixture.detectChanges();
+
+    expect(input().type).toBe('text');
+    expect(toggle(el).getAttribute('aria-pressed')).toBe('true');
+
+    toggle(el).click();
+    fixture.detectChanges();
+
+    expect(input().type).toBe('password');
+    expect(toggle(el).getAttribute('aria-pressed')).toBe('false');
+  });
+
+  it('keeps what the user typed when switching', async () => {
+    const { fixture, host, el, input } = await render();
+    input().value = 'my-secret-1';
+    input().dispatchEvent(new Event('input'));
+
+    toggle(el).click();
+    fixture.detectChanges();
+
+    expect(input().value).toBe('my-secret-1');
+    expect(host.control.value).toBe('my-secret-1');
+  });
+
+  it('points the button at the input it controls', async () => {
+    const { el, input } = await render();
+
+    expect(toggle(el).getAttribute('aria-controls')).toBe(input().id);
+  });
+
+  it('translates the button label when the language changes', async () => {
+    const { fixture, el } = await render();
+
+    await TestBed.inject(LanguageService).setLanguage('en');
+    fixture.detectChanges();
+
+    expect(toggle(el).getAttribute('aria-label')).toBe('Show password');
+  });
+
+  it('is not offered on fields that are not passwords', async () => {
+    localStorage.clear();
+    TestBed.configureTestingModule({ imports: [EmailHost], providers: [provideTestI18n()] });
+    const fixture = TestBed.createComponent(EmailHost);
+    await fixture.whenStable();
+
+    expect((fixture.nativeElement as HTMLElement).querySelector('button')).toBeNull();
+  });
+});
