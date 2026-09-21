@@ -19,7 +19,9 @@
 }
 
 .header__logo {
+  @include m.touch-target;
   display: inline-flex;
+  align-items: center;
   border-radius: var(--radius-input);
   text-decoration: none;
 }
