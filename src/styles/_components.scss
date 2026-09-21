@@ -90,3 +90,17 @@
     background: color-mix(in srgb, var(--danger) 8%, var(--surface));
   }
 }
+
+// Small label, used for the estimated level and similar facts.
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 2px var(--sp-12);
+  border-radius: var(--radius-pill);
+  background: var(--primary-soft);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}

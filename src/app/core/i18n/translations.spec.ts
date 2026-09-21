@@ -1,3 +1,4 @@
+import { CATEGORIES, RULE_TAGS } from '../../features/write/analysis.models';
 import { API_ERROR_CODES } from '../api/error-codes';
 import ca from '../../../assets/i18n/ca.json';
 import en from '../../../assets/i18n/en.json';
@@ -59,6 +60,18 @@ describe('translation files', () => {
   it('translate every stable error code of the API', () => {
     for (const [lang, entries] of Object.entries(files)) {
       const missing = API_ERROR_CODES.filter((code) => !entries[`errors.api.${code}`]);
+      expect({ lang, missing }).toEqual({ lang, missing: [] });
+    }
+  });
+
+  it('name every error category and every rule the API can send', () => {
+    for (const [lang, entries] of Object.entries(files)) {
+      const missing = [
+        ...CATEGORIES.filter((category) => !entries[`categories.${category}`]).map(
+          (c) => `categories.${c}`,
+        ),
+        ...RULE_TAGS.filter((rule) => !entries[`rules.${rule}`]).map((r) => `rules.${r}`),
+      ];
       expect({ lang, missing }).toEqual({ lang, missing: [] });
     }
   });

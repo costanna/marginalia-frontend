@@ -58,6 +58,13 @@
         "title": "Practice made for you",
         "text": "Exercises built from the mistakes you make most often."
       }
+    },
+    "demo": {
+      "title": "Try it now",
+      "subtitle": "No sign-up needed. Up to 3 analyses a day.",
+      "useSample": "Use an example",
+      "sample": "Yesterday I go to the cinema with my friends. We watched a interesting film and I has enjoyed it very much.",
+      "cta": "Liked it? Create an account to save your texts and track your progress."
     }
   },
   "auth": {
@@ -116,11 +123,69 @@
   "write": {
     "title": "Write",
     "welcome": "Hi, {{name}}!",
-    "comingSoon": "Soon you'll be able to write your texts and get corrections here. We're getting it ready."
+    "titleLabel": "Title (optional)",
+    "textLabel": "Your text in English",
+    "textPlaceholder": "Write your text in English here…",
+    "submit": "Check my text",
+    "analyzing": "Analysing your text…",
+    "edit": "Edit text",
+    "new": "New text",
+    "tabs": {
+      "text": "Text",
+      "corrections": "Corrections ({{count}})"
+    },
+    "result": {
+      "label": "Analysis result",
+      "level": "Estimated level",
+      "words": "{{count}} words",
+      "summary": "Teacher's note",
+      "noCorrections": "No corrections! Your text looks great.",
+      "corrections": "Corrections ({{count}})",
+      "hint": "Select a mark in the text to see its correction.",
+      "applyAll": "Apply all",
+      "apply": "Apply",
+      "undo": "Undo",
+      "applied": "Applied",
+      "copy": "Copy text",
+      "copied": "Text copied.",
+      "copyFailed": "Couldn't copy. Select the text and copy it by hand.",
+      "original": "Original",
+      "betterSo": "Almost. Better like this:",
+      "rule": "Rule",
+      "detailTitle": "Correction"
+    }
   },
   "notFound": {
     "title": "This page doesn't exist",
     "text": "The address may be wrong, or the page may have moved.",
     "back": "Back to the home page"
+  },
+  "categories": {
+    "grammar": "Grammar",
+    "spelling": "Spelling",
+    "vocabulary": "Vocabulary",
+    "punctuation": "Punctuation",
+    "style": "Style and register"
+  },
+  "rules": {
+    "verb_tense": "Verb tense",
+    "subject_verb_agreement": "Subject-verb agreement",
+    "articles": "Articles",
+    "prepositions": "Prepositions",
+    "word_order": "Word order",
+    "plural_nouns": "Plural nouns",
+    "pronouns": "Pronouns",
+    "modal_verbs": "Modal verbs",
+    "conditionals": "Conditionals",
+    "passive_voice": "Passive voice",
+    "phrasal_verbs": "Phrasal verbs",
+    "collocations": "Collocations",
+    "false_friends": "False friends",
+    "spelling_common": "Common spelling mistakes",
+    "punctuation_commas": "Commas and punctuation",
+    "capitalization": "Capitalisation",
+    "register_formal": "Formal register",
+    "run_on_sentence": "Run-on sentences",
+    "other": "Other"
   }
 }

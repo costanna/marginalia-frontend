@@ -3,6 +3,29 @@ import { SupportedLang } from '../../core/i18n/supported-languages';
 export const CATEGORIES = ['grammar', 'spelling', 'vocabulary', 'punctuation', 'style'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
+/** The closed list of rules the API can attach to a correction (`rule_tag`), used for statistics. */
+export const RULE_TAGS = [
+  'verb_tense',
+  'subject_verb_agreement',
+  'articles',
+  'prepositions',
+  'word_order',
+  'plural_nouns',
+  'pronouns',
+  'modal_verbs',
+  'conditionals',
+  'passive_voice',
+  'phrasal_verbs',
+  'collocations',
+  'false_friends',
+  'spelling_common',
+  'punctuation_commas',
+  'capitalization',
+  'register_formal',
+  'run_on_sentence',
+  'other',
+] as const;
+
 export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
 
 /**
