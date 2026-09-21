@@ -15,20 +15,12 @@ $breakpoints: (
   }
 }
 
-/// Centered page container: max 1200px with 16 / 24 / 32px side padding.
+/// Page container: the full width of the screen, with side padding that grows with it
+/// (16px on a phone, up to 64px on a large monitor). Things that read badly when stretched, such
+/// as a sign-in card or a paragraph, set their own narrower width inside it.
 @mixin container {
   width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: var(--sp-16);
-
-  @include up(md) {
-    padding-inline: var(--sp-24);
-  }
-
-  @include up(lg) {
-    padding-inline: var(--sp-32);
-  }
+  padding-inline: clamp(1rem, 4vw, 4rem);
 }
 
 /// Minimum touch target (44x44px, WCAG 2.5.5) for anything clickable.
