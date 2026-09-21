@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  padding: var(--sp-16);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.card--selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-8);
+  min-height: 44px;
+  margin: calc(var(--sp-8) * -1);
+  padding: var(--sp-8);
+  border: 0;
+  border-radius: var(--radius-input);
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+}
+
+// The category is shown by name AND by the underline style used in the text, never by colour alone.
+.category {
+  padding: 1px var(--sp-8);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--c) var(--mark-alpha), transparent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: underline var(--c);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
+
+.category[data-category='grammar'] {
+  --c: var(--cat-grammar);
+  text-decoration-style: wavy;
+}
+
+.category[data-category='spelling'] {
+  --c: var(--cat-spelling);
+  text-decoration-style: dotted;
+}
+
+.category[data-category='vocabulary'] {
+  --c: var(--cat-vocabulary);
+  text-decoration-style: dashed;
+}
+
+.category[data-category='punctuation'] {
+  --c: var(--cat-punctuation);
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+}
+
+.category[data-category='style'] {
+  --c: var(--cat-style);
+  text-decoration-style: double;
+}
+
+.rule {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.was,
+.better {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4) var(--sp-8);
+  align-items: baseline;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+}
+
+.label {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+}
+
+del {
+  color: var(--text-muted);
+  text-decoration-thickness: 1.5px;
+}
+
+ins {
+  color: var(--success);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.why {
+  font-size: 0.9375rem;
+}
+
+.apply {
+  align-self: flex-start;
+}

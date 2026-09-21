@@ -124,3 +124,57 @@ describe('FormFieldComponent', () => {
     expect(error()?.textContent?.trim()).toBe('This field is required.');
   });
 });
+
+@Component({
+  imports: [FormFieldComponent],
+  template: `<app-form-field
+    [control]="control"
+    label="write.textLabel"
+    [multiline]="true"
+    placeholder="write.textPlaceholder"
+    [counterMax]="20"
+  />`,
+})
+class MultilineHost {
+  control = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+}
+
+describe('FormFieldComponent (multi-line, with counter)', () => {
+  async function renderMultiline() {
+    localStorage.clear();
+    TestBed.configureTestingModule({ imports: [MultilineHost], providers: [provideTestI18n()] });
+    await TestBed.inject(LanguageService).setLanguage('es');
+    const fixture = TestBed.createComponent(MultilineHost);
+    await fixture.whenStable();
+    return { fixture, host: fixture.componentInstance, el: fixture.nativeElement as HTMLElement };
+  }
+
+  it('renders a labelled text area with a translated placeholder', async () => {
+    const { el } = await renderMultiline();
+
+    const area = el.querySelector('textarea')!;
+
+    expect(el.querySelector('input')).toBeNull();
+    expect(el.querySelector('label')?.getAttribute('for')).toBe(area.id);
+    expect(area.getAttribute('placeholder')).toBe('Escribe aquí tu texto en inglés…');
+  });
+
+  it('counts characters the way the API does: emoji are one', async () => {
+    const { fixture, host, el } = await renderMultiline();
+
+    host.control.setValue('😀😀😀 hi');
+    fixture.detectChanges();
+
+    expect(el.querySelector('.counter')?.textContent?.trim()).toBe('6 / 20');
+  });
+
+  it('warns visually when the limit is exceeded, and hides the counter from screen readers', async () => {
+    const { fixture, host, el } = await renderMultiline();
+
+    host.control.setValue('x'.repeat(21));
+    fixture.detectChanges();
+
+    expect(el.querySelector('.counter')?.classList).toContain('counter--over');
+    expect(el.querySelector('.counter')?.getAttribute('aria-hidden')).toBe('true');
+  });
+});

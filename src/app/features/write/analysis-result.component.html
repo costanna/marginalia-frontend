@@ -1,0 +1,148 @@
+<section class="result" tabindex="-1" [attr.aria-label]="'write.result.label' | transloco">
+  <div class="facts">
+    <span class="chip">{{ 'write.result.level' | transloco }}: {{ result().cefr_level }}</span>
+    <span class="chip">{{ 'write.result.words' | transloco: { count: result().word_count } }}</span>
+  </div>
+
+  <div class="card note">
+    <h3>{{ 'write.result.summary' | transloco }}</h3>
+    <p>{{ result().summary }}</p>
+  </div>
+
+  @if (items().length === 0) {
+    <p class="all-good" role="status">{{ 'write.result.noCorrections' | transloco }}</p>
+  } @else {
+    <div class="tabs" role="tablist" [hidden]="isDesktop()">
+      @for (t of tabs; track t) {
+        <button
+          type="button"
+          role="tab"
+          class="tab"
+          [id]="'result-tab-' + t"
+          [attr.aria-selected]="tab() === t"
+          [attr.aria-controls]="'result-pane-' + t"
+          [attr.tabindex]="tab() === t ? 0 : -1"
+          (click)="selectTab(t)"
+          (keydown)="onTabKeydown($event)"
+        >
+          @if (t === 'text') {
+            {{ 'write.tabs.text' | transloco }}
+          } @else {
+            {{ 'write.tabs.corrections' | transloco: { count: items().length } }}
+          }
+        </button>
+      }
+    </div>
+  }
+
+  <div class="layout">
+    <div
+      class="pane"
+      id="result-pane-text"
+      [attr.role]="isDesktop() ? null : 'tabpanel'"
+      [attr.aria-labelledby]="isDesktop() ? null : 'result-tab-text'"
+      [hidden]="paneHidden('text')"
+    >
+      <!-- The text is English whatever the interface language: lang lets screen readers pronounce it. -->
+      <div class="card annotated" lang="en">
+        @for (segment of segments(); track $index) {
+          @if (segment.kind === 'correction') {
+            <!-- [textContent], not {{ }}: the template would add whitespace inside the inline mark -->
+            <button
+              type="button"
+              class="mark"
+              [id]="'mark-' + segment.key"
+              [attr.data-category]="segment.correction.category"
+              [class.mark--applied]="isApplied(segment.key)"
+              [class.mark--selected]="selectedKey() === segment.key"
+              [attr.aria-describedby]="descriptionId(segment.key)"
+              [textContent]="shownText(segment)"
+              (click)="select(segment.key, 'text')"
+            ></button>
+          } @else {
+            <span [textContent]="segment.text"></span>
+          }
+        }
+      </div>
+
+      @if (items().length > 0) {
+        <p class="hint">{{ 'write.result.hint' | transloco }}</p>
+      }
+
+      <div class="actions">
+        <button
+          type="button"
+          class="btn btn--secondary"
+          [disabled]="items().length === 0 || allApplied()"
+          (click)="applyAll()"
+        >
+          {{ 'write.result.applyAll' | transloco }}
+        </button>
+        <button type="button" class="btn btn--primary" (click)="copy()">
+          {{ 'write.result.copy' | transloco }}
+        </button>
+      </div>
+    </div>
+
+    @if (items().length > 0) {
+      <aside
+        class="pane panel"
+        id="result-pane-corrections"
+        [attr.role]="isDesktop() ? null : 'tabpanel'"
+        [attr.aria-labelledby]="isDesktop() ? null : 'result-tab-corrections'"
+        [hidden]="paneHidden('corrections')"
+      >
+        <h3 class="panel__title">
+          {{ 'write.result.corrections' | transloco: { count: items().length } }}
+        </h3>
+        <ul class="list">
+          @for (item of items(); track item.key) {
+            <li [id]="'correction-' + item.key">
+              <app-correction-card
+                [item]="item"
+                [applied]="isApplied(item.key)"
+                [selected]="selectedKey() === item.key"
+                (selectRequested)="select(item.key, 'panel')"
+                (applyToggled)="toggleApplied(item.key)"
+              />
+            </li>
+          }
+        </ul>
+      </aside>
+    }
+  </div>
+</section>
+
+<!-- What each mark says, referenced by aria-describedby. Kept out of the reading flow of the text. -->
+<div class="visually-hidden">
+  @for (item of items(); track item.key) {
+    <span [id]="descriptionId(item.key)">
+      {{ 'categories.' + item.correction.category | transloco }}.
+      {{ 'write.result.betterSo' | transloco }} {{ item.correction.suggestion }}.
+      {{ item.correction.explanation }}
+    </span>
+  }
+</div>
+
+<dialog #sheet class="sheet" [attr.aria-label]="'write.result.detailTitle' | transloco">
+  <div class="sheet__head">
+    <span class="sheet__title">{{ 'write.result.detailTitle' | transloco }}</span>
+    <button
+      type="button"
+      class="sheet__close"
+      [attr.aria-label]="'common.close' | transloco"
+      (click)="closeSheet()"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
+  @if (selectedItem(); as item) {
+    <app-correction-card
+      [item]="item"
+      [applied]="isApplied(item.key)"
+      (applyToggled)="toggleApplied(item.key)"
+    />
+  }
+</dialog>
