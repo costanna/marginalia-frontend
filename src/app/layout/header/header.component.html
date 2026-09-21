@@ -1,0 +1,102 @@
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__logo" routerLink="/" [attr.aria-label]="'nav.goHome' | transloco">
+      <app-logo />
+    </a>
+
+    <nav class="header__nav" [attr.aria-label]="'nav.main' | transloco">
+      @if (auth.isAuthenticated()) {
+        @for (item of navItems; track item.path) {
+          <a class="nav-link" [routerLink]="item.path" routerLinkActive="nav-link--active">
+            {{ item.label | transloco }}
+          </a>
+        }
+      }
+    </nav>
+
+    <div class="header__actions">
+      <app-language-switcher />
+      <app-theme-toggle />
+      @if (auth.isAuthenticated()) {
+        <button type="button" class="btn btn--ghost" (click)="logout()">
+          {{ 'nav.logout' | transloco }}
+        </button>
+      } @else {
+        <a class="btn btn--ghost" routerLink="/login">{{ 'nav.login' | transloco }}</a>
+        <a class="btn btn--primary" routerLink="/register">{{ 'nav.register' | transloco }}</a>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="header__menu-button"
+      aria-haspopup="dialog"
+      [attr.aria-expanded]="menuOpen()"
+      [attr.aria-label]="'nav.menu' | transloco"
+      (click)="openMenu()"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<dialog
+  #panel
+  class="panel"
+  [attr.aria-label]="'nav.menu' | transloco"
+  (close)="menuOpen.set(false)"
+>
+  <div class="panel__content">
+    <div class="panel__head">
+      <span class="panel__title">{{ 'nav.menu' | transloco }}</span>
+      <button
+        type="button"
+        class="panel__close"
+        [attr.aria-label]="'nav.closeMenu' | transloco"
+        (click)="closeMenu()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="panel__nav" [attr.aria-label]="'nav.main' | transloco">
+      @if (auth.isAuthenticated()) {
+        @for (item of navItems; track item.path) {
+          <a class="panel__link" [routerLink]="item.path" routerLinkActive="panel__link--active">
+            {{ item.label | transloco }}
+          </a>
+        }
+      }
+    </nav>
+
+    <div class="panel__prefs">
+      <div class="panel__row">
+        <span>{{ 'language.label' | transloco }}</span>
+        <app-language-switcher />
+      </div>
+      <div class="panel__row">
+        <span>{{ 'theme.label' | transloco }}</span>
+        <app-theme-toggle />
+      </div>
+    </div>
+
+    <div class="panel__account">
+      @if (auth.isAuthenticated()) {
+        <button type="button" class="btn btn--secondary btn--block" (click)="logout()">
+          {{ 'nav.logout' | transloco }}
+        </button>
+      } @else {
+        <a class="btn btn--primary btn--block" routerLink="/register">
+          {{ 'nav.register' | transloco }}
+        </a>
+        <a class="btn btn--secondary btn--block" routerLink="/login">
+          {{ 'nav.login' | transloco }}
+        </a>
+      }
+    </div>
+  </div>
+</dialog>

@@ -1,0 +1,78 @@
+// Colour tokens (spec sections 5.1 and 5.2). Every token exists in both themes.
+// The theme is the `data-theme` attribute on <html>, set before first paint by the inline script
+// in index.html and then kept in sync by ThemeService.
+
+@mixin light-tokens {
+  color-scheme: light;
+
+  --bg: #fbf8f3;
+  --surface: #ffffff;
+  --surface-alt: #f3eee6;
+  --border: #e4dccf;
+  --text: #1b2038;
+  --text-muted: #5e647e;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --on-primary: #ffffff;
+  --primary-soft: #e8e7fb;
+  --accent: #e5484d; // decorative only, never for small text
+  --danger: #c6303b;
+  --success: #187a4e;
+  --warning: #8a5a00;
+
+  // Error categories: colour + underline style, so meaning never depends on colour alone.
+  --cat-grammar: #e5484d;
+  --cat-spelling: #d99a00;
+  --cat-vocabulary: #0e9aa7;
+  --cat-punctuation: #6b7280;
+  --cat-style: #8e4ec6;
+  --mark-alpha: 14%; // background strength of an annotation mark
+
+  --shadow-card: 0 1px 2px rgb(27 32 56 / 6%), 0 4px 16px rgb(27 32 56 / 6%);
+  --shadow-overlay: 0 8px 32px rgb(27 32 56 / 18%);
+}
+
+@mixin dark-tokens {
+  color-scheme: dark;
+
+  --bg: #0e1120;
+  --surface: #161a2e;
+  --surface-alt: #1e2340;
+  --border: #2b3152;
+  --text: #e9ebf7;
+  --text-muted: #a2a8c6;
+  --primary: #9a98ff;
+  --primary-hover: #b3b1ff;
+  --on-primary: #10132a;
+  --primary-soft: #262a55;
+  --accent: #ff7a81;
+  --danger: #ff8a90;
+  --success: #4cd69a;
+  --warning: #f2b84b;
+
+  --cat-grammar: #ff7a81;
+  --cat-spelling: #f2b84b;
+  --cat-vocabulary: #3cc8d4;
+  --cat-punctuation: #9ca3af;
+  --cat-style: #b98ae8;
+  --mark-alpha: 22%;
+
+  // Shadows are replaced by a 1px border in the dark theme.
+  --shadow-card: 0 0 0 1px var(--border);
+  --shadow-overlay: 0 0 0 1px var(--border);
+}
+
+:root {
+  @include light-tokens;
+}
+
+:root[data-theme='dark'] {
+  @include dark-tokens;
+}
+
+// Without JavaScript the inline script never runs: follow the operating system.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include dark-tokens;
+  }
+}

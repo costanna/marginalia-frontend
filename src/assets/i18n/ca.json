@@ -1,0 +1,127 @@
+{
+  "app": {
+    "name": "Marginalia"
+  },
+  "common": {
+    "loading": "Carregant…",
+    "close": "Tanca"
+  },
+  "nav": {
+    "write": "Escriure",
+    "history": "Historial",
+    "practice": "Practicar",
+    "progress": "Progrés",
+    "settings": "Ajustos",
+    "login": "Inicia la sessió",
+    "register": "Crea un compte",
+    "logout": "Tanca la sessió",
+    "menu": "Menú",
+    "closeMenu": "Tanca el menú",
+    "main": "Navegació principal",
+    "skip": "Salta al contingut",
+    "goHome": "Marginalia, ves a l'inici"
+  },
+  "theme": {
+    "label": "Tema",
+    "light": "Clar",
+    "dark": "Fosc",
+    "system": "Sistema",
+    "switchToDark": "Canvia al tema fosc",
+    "switchToLight": "Canvia al tema clar"
+  },
+  "language": {
+    "label": "Idioma",
+    "ca": "Català",
+    "es": "Castellano",
+    "en": "English"
+  },
+  "footer": {
+    "rights": "Tots els drets reservats.",
+    "author": "Autora"
+  },
+  "home": {
+    "tagline": "Aprèn anglès escrivint.",
+    "subtitle": "Escriu un text en anglès i rep correccions explicades, com les notes que un professor escriu al marge.",
+    "ctaRegister": "Comença gratis",
+    "ctaLogin": "Ja tinc un compte",
+    "privacy": "El text que escriguis s'envia a un proveïdor d'IA per analitzar-lo. Pots esborrar el teu compte i totes les teves dades quan vulguis.",
+    "features": {
+      "title": "Què hi trobaràs",
+      "corrections": {
+        "title": "Correccions que ensenyen",
+        "text": "Cada error ve amb una explicació breu en el teu idioma, no només amb la resposta."
+      },
+      "level": {
+        "title": "El teu nivell, a la vista",
+        "text": "Estimem el teu nivell (d'A1 a C2) amb cada text i seguim el teu progrés."
+      },
+      "practice": {
+        "title": "Pràctica a mida",
+        "text": "Exercicis creats a partir dels errors que més repeteixes."
+      }
+    }
+  },
+  "auth": {
+    "fields": {
+      "email": "Correu electrònic",
+      "password": "Contrasenya",
+      "passwordHint": "Almenys 8 caràcters.",
+      "displayName": "Nom"
+    },
+    "login": {
+      "title": "Inicia la sessió",
+      "subtitle": "Quin gust tornar-te a veure.",
+      "submit": "Entra",
+      "switchPrompt": "Encara no tens compte?",
+      "switchLink": "Crea'n un"
+    },
+    "register": {
+      "title": "Crea el teu compte",
+      "subtitle": "Gratuït i sense targeta.",
+      "submit": "Crea el compte",
+      "switchPrompt": "Ja tens un compte?",
+      "switchLink": "Inicia la sessió"
+    }
+  },
+  "form": {
+    "errors": {
+      "required": "Aquest camp és obligatori.",
+      "email": "Escriu un correu electrònic vàlid.",
+      "minlength": "Ha de tenir almenys {{requiredLength}} caràcters.",
+      "maxlength": "Pot tenir com a màxim {{requiredLength}} caràcters."
+    }
+  },
+  "errors": {
+    "network": "No ens hem pogut connectar. Comprova la connexió i torna-ho a provar.",
+    "unknown": "Alguna cosa ha anat malament. Torna-ho a provar.",
+    "api": {
+      "validation_error": "Alguna dada no és correcta. Revisa-les i torna-ho a provar.",
+      "invalid_credentials": "El correu o la contrasenya no són correctes.",
+      "email_taken": "Ja existeix un compte amb aquest correu.",
+      "unauthorized": "La sessió ha caducat. Torna a iniciar-la.",
+      "not_found": "No hem trobat el que buscaves.",
+      "rate_limit_exceeded": "Massa intents seguits. Espera un moment i torna-ho a provar.",
+      "daily_quota_exceeded": "Has arribat al límit diari d'anàlisis. Torna demà.",
+      "text_too_short": "El text és massa curt (mínim {{min}} caràcters).",
+      "text_too_long": "El text és massa llarg (màxim {{max}} caràcters).",
+      "llm_unavailable": "El servei d'anàlisi no està disponible ara mateix. Torna-ho a provar d'aquí a una estona.",
+      "llm_invalid_response": "No hem pogut entendre la resposta de l'anàlisi. Torna-ho a provar."
+    }
+  },
+  "server": {
+    "waking": "S'està despertant el servidor… pot trigar fins a un minut."
+  },
+  "toast": {
+    "close": "Tanca l'avís"
+  },
+  "write": {
+    "title": "Escriure",
+    "welcome": "Hola, {{name}}!",
+    "comingSoon": "Aquí podràs escriure els teus textos i rebre les correccions. Ho estem preparant."
+  },
+  "notFound": {
+    "title": "Aquesta pàgina no existeix",
+    "text": "Potser l'adreça és incorrecta o la pàgina s'ha mogut.",
+    "back": "Torna a l'inici"
+  }
+}

@@ -1,0 +1,38 @@
+@use 'sass:map';
+
+// Mobile-first breakpoints (spec section 8).
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);
+
+/// Applies the content from the given breakpoint upwards: `@include up(md) { ... }`.
+@mixin up($name) {
+  @media (min-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+/// Centered page container: max 1200px with 16 / 24 / 32px side padding.
+@mixin container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--sp-16);
+
+  @include up(md) {
+    padding-inline: var(--sp-24);
+  }
+
+  @include up(lg) {
+    padding-inline: var(--sp-32);
+  }
+}
+
+/// Minimum touch target (44x44px, WCAG 2.5.5) for anything clickable.
+@mixin touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
