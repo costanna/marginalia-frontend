@@ -13,6 +13,12 @@
   </div>
 </section>
 
+@if (!auth.isAuthenticated()) {
+  <div class="demo-section container">
+    <app-demo-editor />
+  </div>
+}
+
 <section class="features container" aria-labelledby="features-title">
   <h2 id="features-title" class="visually-hidden">{{ 'home.features.title' | transloco }}</h2>
   <ul class="features__list">

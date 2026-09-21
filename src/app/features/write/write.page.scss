@@ -1,0 +1,51 @@
+@use 'styles/mixins' as m;
+
+.write {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  padding-block: var(--sp-24) var(--sp-48);
+
+  @include m.up(lg) {
+    padding-block: var(--sp-32) var(--sp-64);
+  }
+}
+
+.write__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.write__welcome {
+  color: var(--text-muted);
+}
+
+.write__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  max-width: 52rem;
+}
+
+.write__privacy {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.write__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+}
+
+.write__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  max-width: 52rem;
+
+  p {
+    color: var(--text-muted);
+  }
+}

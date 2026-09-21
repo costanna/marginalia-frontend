@@ -43,6 +43,10 @@
   }
 }
 
+.demo-section {
+  padding-bottom: var(--sp-48);
+}
+
 .features__list {
   display: grid;
   gap: var(--sp-16);

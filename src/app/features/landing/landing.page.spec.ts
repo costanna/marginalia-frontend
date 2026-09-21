@@ -71,6 +71,19 @@ describe('LandingPage', () => {
     ]);
   });
 
+  it('lets an anonymous visitor try the corrector right on the page', async () => {
+    const { el } = await render('es');
+
+    expect(el.querySelector('app-demo-editor')).not.toBeNull();
+    expect(el.querySelector('#demo-title')?.textContent?.trim()).toBe('Pruébalo ahora');
+  });
+
+  it('does not show the try-it box to a signed-in user (they have the writing screen)', async () => {
+    const { el } = await render('es', true);
+
+    expect(el.querySelector('app-demo-editor')).toBeNull();
+  });
+
   it('tells visitors their text goes to an AI provider', async () => {
     const { el } = await render('en');
 
