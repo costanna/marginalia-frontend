@@ -31,6 +31,19 @@ export const routes: Routes = [
     loadComponent: () => import('./features/write/write.page').then((m) => m.WritePage),
   },
   {
+    path: 'history',
+    canActivate: [authGuard],
+    title: 'nav.history',
+    loadComponent: () => import('./features/history/history.page').then((m) => m.HistoryPage),
+  },
+  {
+    path: 'history/:id',
+    canActivate: [authGuard],
+    title: 'nav.history',
+    loadComponent: () =>
+      import('./features/history/history-detail.page').then((m) => m.HistoryDetailPage),
+  },
+  {
     path: '**',
     title: 'notFound.title',
     loadComponent: () => import('./features/not-found/not-found.page').then((m) => m.NotFoundPage),
