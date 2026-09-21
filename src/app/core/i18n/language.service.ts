@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject, signal } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from 'rxjs';
 import {
@@ -21,6 +22,7 @@ import {
 export class LanguageService {
   private readonly transloco = inject(TranslocoService);
   private readonly document = inject(DOCUMENT);
+  private readonly meta = inject(Meta);
   private readonly current = signal<SupportedLang>(DEFAULT_LANG);
 
   readonly language = this.current.asReadonly();
@@ -49,6 +51,11 @@ export class LanguageService {
     this.transloco.setActiveLang(lang);
     this.current.set(lang);
     this.document.documentElement.lang = lang;
+    // Search engines and link previews show this text: keep it in the visitor's language.
+    this.meta.updateTag({
+      name: 'description',
+      content: this.transloco.translate('home.subtitle') ?? '',
+    });
   }
 
   private detectInitialLanguage(): SupportedLang {

@@ -18,8 +18,7 @@
     "menu": "Menu",
     "closeMenu": "Close menu",
     "main": "Main navigation",
-    "skip": "Skip to content",
-    "goHome": "Marginalia, go to the home page"
+    "skip": "Skip to content"
   },
   "theme": {
     "label": "Theme",
