@@ -18,8 +18,7 @@
     "menu": "Menú",
     "closeMenu": "Tanca el menú",
     "main": "Navegació principal",
-    "skip": "Salta al contingut",
-    "goHome": "Marginalia, ves a l'inici"
+    "skip": "Salta al contingut"
   },
   "theme": {
     "label": "Tema",

@@ -18,8 +18,7 @@
     "menu": "Menú",
     "closeMenu": "Cerrar menú",
     "main": "Navegación principal",
-    "skip": "Saltar al contenido",
-    "goHome": "Marginalia, ir al inicio"
+    "skip": "Saltar al contenido"
   },
   "theme": {
     "label": "Tema",

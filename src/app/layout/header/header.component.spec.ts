@@ -82,15 +82,25 @@ describe('HeaderComponent', () => {
   });
 
   describe('landmarks and labels', () => {
-    it('has a labelled main navigation and a logo link that says where it goes', async () => {
+    it('has a labelled main navigation', async () => {
       const { el } = await render();
 
       expect(el.querySelector('header nav')?.getAttribute('aria-label')).toBe(
         'Navegación principal',
       );
-      expect(el.querySelector('.header__logo')?.getAttribute('aria-label')).toBe(
-        'Marginalia, ir al inicio',
-      );
+    });
+
+    it('names the logo link by its visible wordmark, without an aria-label that could differ', async () => {
+      const { el } = await render();
+
+      const logo = el.querySelector('.header__logo') as HTMLAnchorElement;
+
+      // WCAG 2.5.3 (Label in Name): a label override that does not match the visible text breaks
+      // voice control ("click Marginalia"). With no override the name is the visible wordmark.
+      expect(logo.hasAttribute('aria-label')).toBe(false);
+      expect(logo.querySelector('.wordmark')?.textContent?.trim()).toBe('Marginalia');
+      expect(logo.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true');
+      expect(logo.getAttribute('href')).toBe('/');
     });
 
     it('has a menu button that announces the dialog it opens', async () => {

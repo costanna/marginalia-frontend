@@ -1,6 +1,8 @@
 <header class="header">
   <div class="header__inner container">
-    <a class="header__logo" routerLink="/" [attr.aria-label]="'nav.goHome' | transloco">
+    <!-- No aria-label: the accessible name comes from the visible wordmark. An aria-label that
+         differs from the visible text breaks WCAG 2.5.3 (Label in Name) for voice-control users. -->
+    <a class="header__logo" routerLink="/">
       <app-logo />
     </a>
 
