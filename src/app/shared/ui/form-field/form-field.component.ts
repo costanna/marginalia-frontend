@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -15,6 +15,10 @@ let nextId = 0;
  * `aria-describedby`, the invalid state is exposed with `aria-invalid`, and the error is announced
  * (`role="alert"`) rather than communicated by colour alone. Errors appear once the field has
  * been touched, or when the form is submitted (`markAllAsTouched`).
+ *
+ * Password fields get a button to show or hide what was typed. It is a toggle button: its name
+ * stays "Show password" and `aria-pressed` tells the state, so a screen reader announces
+ * "Show password, toggle button, pressed" instead of a label that flips under the user.
  */
 @Component({
   selector: 'app-form-field',
@@ -34,17 +38,43 @@ let nextId = 0;
         [attr.aria-required]="required() ? 'true' : null"
       ></textarea>
     } @else {
-      <input
-        class="input"
-        [id]="id"
-        [type]="type()"
-        [formControl]="control()"
-        [attr.autocomplete]="autocomplete()"
-        [attr.inputmode]="inputmode()"
-        [attr.aria-invalid]="showError() ? 'true' : null"
-        [attr.aria-describedby]="describedBy()"
-        [attr.aria-required]="required() ? 'true' : null"
-      />
+      <div class="control">
+        <input
+          class="input"
+          [class.input--with-reveal]="isPassword()"
+          [id]="id"
+          [type]="inputType()"
+          [formControl]="control()"
+          [attr.autocomplete]="autocomplete()"
+          [attr.inputmode]="inputmode()"
+          [attr.aria-invalid]="showError() ? 'true' : null"
+          [attr.aria-describedby]="describedBy()"
+          [attr.aria-required]="required() ? 'true' : null"
+        />
+        @if (isPassword()) {
+          <button
+            type="button"
+            class="reveal"
+            [attr.aria-label]="'form.showPassword' | transloco"
+            [attr.aria-pressed]="revealed()"
+            [attr.aria-controls]="id"
+            (click)="revealed.set(!revealed())"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              @if (revealed()) {
+                <path d="M3 3l18 18" />
+                <path
+                  d="M10.6 6.1A9.9 9.9 0 0 1 12 6c5.5 0 9 6 9 6a15.6 15.6 0 0 1-2.8 3.4M6.6 7.7C4.2 9.3 3 12 3 12s3.5 6 9 6a9 9 0 0 0 3.4-.7"
+                />
+                <path d="M9.9 10a3 3 0 0 0 4.1 4.1" />
+              } @else {
+                <path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" />
+                <circle cx="12" cy="12" r="3" />
+              }
+            </svg>
+          </button>
+        }
+      </div>
     }
     @if (counterMax(); as max) {
       <!-- Visual aid only: the limit is announced through the error message when it is exceeded. -->
@@ -71,6 +101,16 @@ let nextId = 0;
       font-size: 0.9375rem;
     }
 
+    .control {
+      position: relative;
+      display: flex;
+    }
+
+    .control .input {
+      flex: 1;
+      min-width: 0;
+    }
+
     .input {
       min-height: 44px;
       padding: var(--sp-8) var(--sp-12);
@@ -79,6 +119,46 @@ let nextId = 0;
       background: var(--surface);
       color: var(--text);
       transition: border-color var(--transition);
+    }
+
+    // Room for the reveal button on the trailing side (it follows the reading direction).
+    .input--with-reveal {
+      padding-inline-end: 3rem;
+    }
+
+    // The browser draws its own reveal icon on password fields (Edge); ours replaces it.
+    .input::-ms-reveal,
+    .input::-ms-clear {
+      display: none;
+    }
+
+    .reveal {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: 0;
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-input);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .reveal:hover {
+      color: var(--text);
+    }
+
+    .reveal svg {
+      width: 1.375rem;
+      height: 1.375rem;
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .input--multiline {
@@ -143,6 +223,12 @@ export class FormFieldComponent {
   readonly counterMax = input<number | null>(null);
 
   protected readonly id = `field-${nextId++}`;
+  /** Whether a password is currently shown as plain text. */
+  protected readonly revealed = signal(false);
+  protected readonly isPassword = computed(() => this.type() === 'password');
+  protected readonly inputType = computed(() =>
+    this.isPassword() && this.revealed() ? 'text' : this.type(),
+  );
   protected readonly hintId = `${this.id}-hint`;
   protected readonly errorId = `${this.id}-error`;
 
