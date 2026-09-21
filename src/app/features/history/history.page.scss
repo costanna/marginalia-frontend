@@ -35,21 +35,6 @@
   }
 }
 
-.select {
-  min-height: 44px;
-  min-width: 12rem;
-  padding: var(--sp-8) var(--sp-12);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-input);
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--text-muted);
-  }
-}
-
 .history__state {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,124 @@
+<div class="settings container">
+  <h1>{{ 'settings.title' | transloco }}</h1>
+
+  <div class="settings__layout">
+    <nav class="settings__menu" [attr.aria-label]="'settings.menu' | transloco">
+      <ul>
+        @for (section of sections; track section) {
+          <li>
+            <button type="button" class="settings__link" (click)="goTo(section)">
+              {{ 'settings.sections.' + section | transloco }}
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="settings__content">
+      <section class="card settings__section" aria-labelledby="settings-profile">
+        <h2 id="settings-profile" tabindex="-1">{{ 'settings.sections.profile' | transloco }}</h2>
+        @if (auth.user(); as user) {
+          <p class="settings__email">
+            <span class="settings__email-label">{{ 'auth.fields.email' | transloco }}</span>
+            {{ user.email }}
+          </p>
+          <form class="settings__form" [formGroup]="form" (ngSubmit)="saveProfile()" novalidate>
+            <app-form-field
+              [control]="form.controls.displayName"
+              label="settings.profile.name"
+              autocomplete="name"
+              [required]="true"
+            />
+            <div class="field">
+              <label for="settings-level">{{ 'settings.profile.targetLevel' | transloco }}</label>
+              <select
+                id="settings-level"
+                class="select"
+                [formControl]="form.controls.targetLevel"
+                aria-describedby="settings-level-hint"
+              >
+                <option value="">{{ 'settings.profile.targetLevelNone' | transloco }}</option>
+                @for (level of levels; track level) {
+                  <option [value]="level">{{ level }}</option>
+                }
+              </select>
+              <p id="settings-level-hint" class="hint">
+                {{ 'settings.profile.targetLevelHint' | transloco }}
+              </p>
+            </div>
+            <app-button type="submit" [loading]="saving()">
+              {{ 'settings.profile.save' | transloco }}
+            </app-button>
+          </form>
+        } @else {
+          <div role="status">
+            <span class="visually-hidden">{{ 'common.loading' | transloco }}</span>
+            <app-skeleton [lines]="4" />
+          </div>
+        }
+      </section>
+
+      <section class="card settings__section" aria-labelledby="settings-preferences">
+        <h2 id="settings-preferences" tabindex="-1">
+          {{ 'settings.sections.preferences' | transloco }}
+        </h2>
+        <p class="settings__text">{{ 'settings.preferences.text' | transloco }}</p>
+        <div class="settings__form">
+          <div class="field">
+            <label for="settings-theme">{{ 'theme.label' | transloco }}</label>
+            <select id="settings-theme" class="select" (change)="setTheme($event)">
+              @for (option of themes; track option) {
+                <option [value]="option" [selected]="option === theme.preference()">
+                  {{ 'theme.' + option | transloco }}
+                </option>
+              }
+            </select>
+          </div>
+          <div class="field">
+            <label for="settings-language">{{ 'language.label' | transloco }}</label>
+            <select id="settings-language" class="select" (change)="setLanguage($event)">
+              @for (option of language.languages; track option) {
+                <option [value]="option" [selected]="option === language.language()">
+                  {{ 'language.' + option | transloco }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card settings__section" aria-labelledby="settings-data">
+        <h2 id="settings-data" tabindex="-1">{{ 'settings.sections.data' | transloco }}</h2>
+        <p class="settings__text">{{ 'settings.data.text' | transloco }}</p>
+        <div>
+          <app-button variant="secondary" [loading]="exporting()" (click)="exportData()">
+            {{ 'settings.data.export' | transloco }}
+          </app-button>
+        </div>
+      </section>
+
+      <section class="card settings__section settings__danger" aria-labelledby="settings-account">
+        <h2 id="settings-account" tabindex="-1">{{ 'settings.sections.account' | transloco }}</h2>
+        <p class="settings__text">{{ 'settings.account.text' | transloco }}</p>
+        <div>
+          <button
+            type="button"
+            class="btn btn--secondary btn--danger-outline"
+            (click)="askToDeleteAccount()"
+          >
+            {{ 'settings.account.delete' | transloco }}
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<app-confirm-dialog
+  title="settings.account.confirmTitle"
+  message="settings.account.confirmMessage"
+  confirmLabel="settings.account.confirmButton"
+  [danger]="true"
+  [busy]="deleting()"
+  (confirmed)="deleteAccount()"
+/>

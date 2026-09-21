@@ -1,0 +1,147 @@
+@use 'styles/mixins' as m;
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  padding-block: var(--sp-24) var(--sp-48);
+
+  @include m.up(lg) {
+    padding-block: var(--sp-32) var(--sp-64);
+  }
+}
+
+// Phone and tablet: the sections are simply stacked. From 1024px: a side menu and the content.
+.settings__layout {
+  display: grid;
+  gap: var(--sp-24);
+
+  @include m.up(lg) {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    align-items: start;
+    gap: var(--sp-32);
+  }
+}
+
+.settings__menu {
+  display: none;
+
+  @include m.up(lg) {
+    display: block;
+    position: sticky;
+    top: calc(4.5rem + var(--sp-16));
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.settings__link {
+  @include m.touch-target;
+  width: 100%;
+  padding: var(--sp-8) var(--sp-12);
+  border: 0;
+  border-radius: var(--radius-input);
+  background: transparent;
+  color: var(--text);
+  font-weight: 500;
+  text-align: start;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+}
+
+.settings__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  min-width: 0;
+}
+
+.settings__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  // Focus lands here when the side menu is used; the ring is enough, no need for the browser's.
+  h2:focus {
+    outline: none;
+  }
+
+  h2:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+}
+
+.settings__text {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--text-muted);
+}
+
+.settings__email {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4) var(--sp-12);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.settings__email-label {
+  font-weight: 600;
+}
+
+// Forms stay a comfortable width even when the card is wide.
+.settings__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  width: 100%;
+  max-width: 28rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+
+  label {
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+}
+
+.hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.settings__danger {
+  border-color: var(--danger);
+}
+
+// A destructive action that is not the confirmation itself: outlined, so the red is saved for the
+// button that really deletes.
+.btn--danger-outline {
+  border-color: var(--danger);
+  color: var(--danger);
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--danger) 8%, var(--surface));
+    color: var(--danger);
+  }
+}

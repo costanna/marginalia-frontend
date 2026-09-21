@@ -44,6 +44,12 @@ export const routes: Routes = [
       import('./features/history/history-detail.page').then((m) => m.HistoryDetailPage),
   },
   {
+    path: 'settings',
+    canActivate: [authGuard],
+    title: 'nav.settings',
+    loadComponent: () => import('./features/settings/settings.page').then((m) => m.SettingsPage),
+  },
+  {
     path: '**',
     title: 'notFound.title',
     loadComponent: () => import('./features/not-found/not-found.page').then((m) => m.NotFoundPage),

@@ -31,21 +31,6 @@ let nextId = 0;
       }
     </select>
   `,
-  styles: `
-    .select {
-      min-height: 44px;
-      padding: var(--sp-8) var(--sp-12);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-input);
-      background: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .select:hover {
-      border-color: var(--text-muted);
-    }
-  `,
 })
 export class LanguageSwitcherComponent {
   protected readonly language = inject(LanguageService);

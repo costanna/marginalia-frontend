@@ -91,6 +91,22 @@
   }
 }
 
+// A native <select> (language, theme, level filter, target level): keyboard and screen-reader
+// behaviour come from the browser, and phones show their own picker.
+.select {
+  min-height: 44px;
+  padding: var(--sp-8) var(--sp-12);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--text-muted);
+  }
+}
+
 // Small label, used for the estimated level and similar facts.
 .chip {
   display: inline-flex;

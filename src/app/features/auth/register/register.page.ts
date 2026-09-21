@@ -8,6 +8,7 @@ import { errorTranslationKey } from '../../../core/api/error.interceptor';
 import { AuthService } from '../../../core/auth/auth.service';
 import { DEFAULT_RETURN_URL } from '../../../core/auth/return-url';
 import { LanguageService } from '../../../core/i18n/language.service';
+import { notBlank } from '../../../shared/forms/not-blank.validator';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { FormFieldComponent } from '../../../shared/ui/form-field/form-field.component';
 
@@ -31,7 +32,7 @@ export class RegisterPage {
   protected readonly form = new FormGroup({
     displayName: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(NAME_MAX)],
+      validators: [Validators.required, notBlank, Validators.maxLength(NAME_MAX)],
     }),
     email: new FormControl('', {
       nonNullable: true,
