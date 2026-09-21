@@ -4,7 +4,8 @@
   },
   "common": {
     "loading": "Loading…",
-    "close": "Close"
+    "close": "Close",
+    "cancel": "Cancel"
   },
   "nav": {
     "write": "Write",
@@ -154,6 +155,86 @@
       "betterSo": "Almost. Better like this:",
       "rule": "Rule",
       "detailTitle": "Correction"
+    }
+  },
+  "history": {
+    "title": "History",
+    "subtitle": "Every text you have checked, newest first.",
+    "filter": {
+      "label": "Level",
+      "all": "All levels"
+    },
+    "card": {
+      "words": "Words: {{count}}",
+      "corrections": "Corrections: {{count}}"
+    },
+    "untitled": "Untitled text",
+    "pagination": {
+      "label": "Pages",
+      "previous": "Previous",
+      "next": "Next",
+      "status": "Page {{page}} of {{pages}}"
+    },
+    "loading": "Loading your texts…",
+    "loadFailed": "We couldn't load your texts.",
+    "retry": "Try again",
+    "empty": {
+      "title": "You haven't saved any text yet",
+      "text": "Every text you check is saved here, so you can read it again and see how you improve.",
+      "cta": "Write my first text"
+    },
+    "emptyFiltered": {
+      "title": "No texts of this level",
+      "text": "Try another level, or show them all.",
+      "clear": "Show all levels"
+    },
+    "detail": {
+      "back": "Back to history",
+      "writtenOn": "Written on {{date}}",
+      "delete": "Delete text",
+      "deleteTitle": "Delete this text?",
+      "deleteMessage": "The text and its corrections will be deleted for good. This can't be undone.",
+      "deleteConfirm": "Delete",
+      "deleted": "Text deleted.",
+      "notFound": {
+        "title": "We couldn't find this text",
+        "text": "It may have been deleted.",
+        "cta": "Back to history"
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "menu": "Settings sections",
+    "sections": {
+      "profile": "Profile",
+      "preferences": "Appearance and language",
+      "data": "Your data",
+      "account": "Delete account"
+    },
+    "profile": {
+      "name": "Name",
+      "targetLevel": "Target level",
+      "targetLevelNone": "Not set",
+      "targetLevelHint": "The level you want to reach. The corrections are adapted to it.",
+      "save": "Save changes",
+      "saved": "Changes saved."
+    },
+    "preferences": {
+      "text": "These are saved to your account and follow you to any device."
+    },
+    "data": {
+      "text": "Download a copy of everything Marginalia stores about you (your profile, your texts and their corrections) as a JSON file.",
+      "export": "Export my data",
+      "exported": "Your data was downloaded."
+    },
+    "account": {
+      "text": "Delete your account and all your texts. This can't be undone.",
+      "delete": "Delete my account",
+      "confirmTitle": "Delete your account?",
+      "confirmMessage": "Your profile, all your texts and their corrections will be deleted for good. You can download a copy of your data first.",
+      "confirmButton": "Yes, delete everything",
+      "deleted": "Your account was deleted."
     }
   },
   "notFound": {

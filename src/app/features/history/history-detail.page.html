@@ -1,0 +1,54 @@
+<section class="detail container">
+  <a class="detail__back" routerLink="/history">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M15 5l-7 7 7 7" />
+    </svg>
+    {{ 'history.detail.back' | transloco }}
+  </a>
+
+  @let current = view();
+  @if (current.status === 'loading') {
+    <div class="detail__state" role="status">
+      <p>{{ 'common.loading' | transloco }}</p>
+      <app-skeleton [lines]="6" />
+    </div>
+  } @else if (current.status === 'notFound') {
+    <app-empty-state title="history.detail.notFound.title" text="history.detail.notFound.text">
+      <a class="btn btn--primary" routerLink="/history">
+        {{ 'history.detail.notFound.cta' | transloco }}
+      </a>
+    </app-empty-state>
+  } @else if (current.status === 'error') {
+    <div class="detail__state">
+      <p class="alert alert--error" role="alert">{{ 'history.loadFailed' | transloco }}</p>
+      <app-button variant="secondary" (click)="retry()">
+        {{ 'history.retry' | transloco }}
+      </app-button>
+    </div>
+  } @else {
+    <header class="detail__head">
+      <div>
+        <h1>{{ current.text.title || ('history.untitled' | transloco) }}</h1>
+        <p class="detail__date">
+          {{
+            'history.detail.writtenOn'
+              | transloco: { date: (current.text.created_at | localDate: language() : 'long') }
+          }}
+        </p>
+      </div>
+      <button type="button" class="btn btn--secondary" (click)="askToDelete()">
+        {{ 'history.detail.delete' | transloco }}
+      </button>
+    </header>
+    <app-analysis-result [result]="current.text" />
+  }
+</section>
+
+<app-confirm-dialog
+  title="history.detail.deleteTitle"
+  message="history.detail.deleteMessage"
+  confirmLabel="history.detail.deleteConfirm"
+  [danger]="true"
+  [busy]="deleting()"
+  (confirmed)="delete()"
+/>

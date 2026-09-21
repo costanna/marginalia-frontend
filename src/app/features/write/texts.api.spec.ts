@@ -84,4 +84,66 @@ describe('TextsApi', () => {
     expect(request.request.body).toEqual({ text: 'Yesterday I go.', ui_language: 'ca' });
     expect(request.request.context.get(SILENT_ERRORS)).toBe(true);
   });
+
+  describe('history', () => {
+    const PAGE = { items: [], page: 2, page_size: 12, total: 0 };
+
+    it('asks for a page of the history', () => {
+      const { api, backend } = setup();
+      let received: unknown;
+
+      api.list(2, null).subscribe((page) => (received = page));
+      const request = backend.expectOne(`${API}/texts?page=2&page_size=12`);
+      request.flush(PAGE);
+
+      expect(request.request.method).toBe('GET');
+      expect(received).toEqual(PAGE);
+    });
+
+    it('can ask for only one level', () => {
+      const { api, backend } = setup();
+
+      api.list(1, 'B1').subscribe();
+      const request = backend.expectOne(`${API}/texts?page=1&page_size=12&level=B1`);
+      request.flush(PAGE);
+
+      expect(request.request.context.get(SILENT_ERRORS)).toBe(true);
+    });
+
+    it('reads one saved text, leaving "not found" for the screen to explain', () => {
+      const { api, backend } = setup();
+      let received: AnalysisResult | undefined;
+
+      api.get('abc-123').subscribe((result) => (received = result));
+      const request = backend.expectOne(`${API}/texts/abc-123`);
+      request.flush(RESULT);
+
+      expect(request.request.method).toBe('GET');
+      expect(request.request.context.get(SILENT_ERRORS)).toBe(true);
+      expect(received).toEqual(RESULT);
+    });
+
+    it('cannot be tricked into calling another path through the id', () => {
+      const { api, backend } = setup();
+
+      api.get('../me').subscribe({ error: () => undefined });
+      const request = backend.expectOne(`${API}/texts/..%2Fme`);
+      request.flush({}, { status: 404, statusText: 'Not Found' });
+
+      expect(request.request.url).not.toContain('/../');
+    });
+
+    it('deletes a text, with the normal error toast if it fails', () => {
+      const { api, backend } = setup();
+      let done = false;
+
+      api.remove('abc-123').subscribe(() => (done = true));
+      const request = backend.expectOne(`${API}/texts/abc-123`);
+      request.flush(null, { status: 204, statusText: 'No Content' });
+
+      expect(request.request.method).toBe('DELETE');
+      expect(request.request.context.get(SILENT_ERRORS)).toBe(false);
+      expect(done).toBe(true);
+    });
+  });
 });

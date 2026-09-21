@@ -5,8 +5,9 @@
 Web app for **Marginalia**, an AI-powered English corrector that annotates a learner's text like a
 teacher's margin notes, estimates the CEFR level and builds personalised exercises.
 
-> Status: **Phase 4 (writing screen)** done: write a text, get it analysed and read it annotated,
-> apply corrections and copy the result; the landing has a try-it-now box. Next: history and settings.
+> Status: **Phase 5 (history and settings)** done: write a text and read it annotated, browse and
+> delete your saved texts, edit your profile, download all your data and delete your account.
+> Next: practice (Phase 6) and progress (Phase 7).
 
 Backend: [marginalia-backend](https://github.com/costanna/marginalia-backend)
 
@@ -41,9 +42,10 @@ free, offline LLM client.
 src/
   app/
     core/       api (ApiService, interceptors), auth, i18n, theme, preferences, toast, config
-    shared/ui/  reusable components: button, form field, logo, theme toggle, language switcher...
+    shared/ui/  reusable components: button, form field, empty state, confirm dialog, logo, toggles...
+    shared/     also forms (validators), format (dates), download (save a JSON file)
     layout/     header (with the mobile side panel), footer, shell
-    features/   landing (with the demo), auth (login, register), write (form, annotated result), not-found
+    features/   landing (with the demo), auth, write, history (list, detail), settings, not-found
   assets/i18n/  ca.json, es.json, en.json
   styles/       tokens, themes (light/dark), base, components
 ```
@@ -55,8 +57,10 @@ src/
 - **Three languages**, switched instantly without reloading; no visible text lives in templates or
   TypeScript, only in the JSON files. A test checks the three files have identical keys and
   parameters, and that every API error code is translated.
-- **Responsive** from 320px to 1920px, mobile first, no horizontal scroll, 44px touch targets and
-  16px inputs.
+- **Responsive** from 320px to 1920px and beyond, mobile first, no horizontal scroll, 44px touch
+  targets and 16px inputs. The page container is fluid (side padding grows from 16px to 64px), so the
+  navbar, footer and pages use the whole screen; only what reads badly stretched keeps a width (the
+  sign-in card, the hero text, the forms in settings).
 - **Footer** with the current year (computed, never typed) and the `@costanna` link on every page.
 - **Accessibility**: landmarks, skip link, visible focus ring, labelled and described form fields,
   announced errors, `prefers-reduced-motion`, information never conveyed by colour alone.
@@ -87,8 +91,18 @@ src/
   spaces inside inline marks.
 - **Categories are told apart by colour AND underline style** (wavy, dotted, dashed, solid, double),
   and the same headings work under any page: their level (`h2`/`h3`) is an input.
-- **Native controls where they are best**: the language menu is a `<select>`, the mobile menu is a
-  modal `<dialog>` (focus trap and Escape for free).
+- **Native controls where they are best**: the language menu is a `<select>`, the mobile menu and the
+  confirmation dialogs are modal `<dialog>`s (focus trap and Escape for free). The confirmation starts
+  on "Cancel" and cannot be dismissed while the request runs.
+- **The history keeps its state in the address** (`/history?level=B1&page=2`): back button, reload and
+  shared links work. A late answer for a filter the user already left is dropped (`switchMap`), and a
+  page past the end shows the last one instead of an error.
+- **The whole history card is one tap target** (the title link stretches over it), so the accessible
+  name stays the title and the target is far above 44px.
+- **"Export my data" is built in the browser**: the JSON the API returns becomes a Blob and a hidden
+  `download` link; nothing goes through a third party. The API limits it to 5 per minute.
+- **Deleting is always asked twice** (a delete button, then a dialog that names the consequence), and
+  deleting the account ends the session and returns to the home page.
 
 ## Environment
 

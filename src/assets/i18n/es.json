@@ -4,7 +4,8 @@
   },
   "common": {
     "loading": "Cargando…",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "cancel": "Cancelar"
   },
   "nav": {
     "write": "Escribir",
@@ -154,6 +155,86 @@
       "betterSo": "Casi. Mejor así:",
       "rule": "Regla",
       "detailTitle": "Corrección"
+    }
+  },
+  "history": {
+    "title": "Historial",
+    "subtitle": "Todos los textos que has corregido, del más reciente al más antiguo.",
+    "filter": {
+      "label": "Nivel",
+      "all": "Todos los niveles"
+    },
+    "card": {
+      "words": "Palabras: {{count}}",
+      "corrections": "Correcciones: {{count}}"
+    },
+    "untitled": "Texto sin título",
+    "pagination": {
+      "label": "Páginas",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "status": "Página {{page}} de {{pages}}"
+    },
+    "loading": "Cargando tus textos…",
+    "loadFailed": "No hemos podido cargar tus textos.",
+    "retry": "Volver a intentarlo",
+    "empty": {
+      "title": "Todavía no has guardado ningún texto",
+      "text": "Cada texto que corriges se guarda aquí, para que puedas releerlo y ver cómo mejoras.",
+      "cta": "Escribir mi primer texto"
+    },
+    "emptyFiltered": {
+      "title": "Ningún texto de este nivel",
+      "text": "Prueba con otro nivel o muéstralos todos.",
+      "clear": "Mostrar todos los niveles"
+    },
+    "detail": {
+      "back": "Volver al historial",
+      "writtenOn": "Escrito el {{date}}",
+      "delete": "Eliminar texto",
+      "deleteTitle": "¿Eliminar este texto?",
+      "deleteMessage": "El texto y sus correcciones se borrarán para siempre. No se puede deshacer.",
+      "deleteConfirm": "Eliminar",
+      "deleted": "Texto eliminado.",
+      "notFound": {
+        "title": "No hemos encontrado este texto",
+        "text": "Puede que se haya eliminado.",
+        "cta": "Volver al historial"
+      }
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "menu": "Secciones de ajustes",
+    "sections": {
+      "profile": "Perfil",
+      "preferences": "Apariencia e idioma",
+      "data": "Tus datos",
+      "account": "Eliminar cuenta"
+    },
+    "profile": {
+      "name": "Nombre",
+      "targetLevel": "Nivel objetivo",
+      "targetLevelNone": "Sin definir",
+      "targetLevelHint": "El nivel que quieres alcanzar. Las correcciones se adaptan a él.",
+      "save": "Guardar cambios",
+      "saved": "Cambios guardados."
+    },
+    "preferences": {
+      "text": "Se guardan en tu cuenta y te acompañan en cualquier dispositivo."
+    },
+    "data": {
+      "text": "Descarga una copia de todo lo que Marginalia guarda sobre ti (tu perfil, tus textos y sus correcciones) en un archivo JSON.",
+      "export": "Exportar mis datos",
+      "exported": "Tus datos se han descargado."
+    },
+    "account": {
+      "text": "Elimina tu cuenta y todos tus textos. No se puede deshacer.",
+      "delete": "Eliminar mi cuenta",
+      "confirmTitle": "¿Eliminar tu cuenta?",
+      "confirmMessage": "Tu perfil, todos tus textos y sus correcciones se borrarán para siempre. Antes puedes descargar una copia de tus datos.",
+      "confirmButton": "Sí, eliminar todo",
+      "deleted": "Tu cuenta se ha eliminado."
     }
   },
   "notFound": {

@@ -60,7 +60,11 @@ describe('HeaderComponent', () => {
     it('shows the navigation and a logout button instead of login and sign-up', async () => {
       const { el } = await render(true);
 
-      expect(texts(el.querySelectorAll('.header__nav a'))).toEqual(['Escribir']);
+      expect(texts(el.querySelectorAll('.header__nav a'))).toEqual([
+        'Escribir',
+        'Historial',
+        'Ajustes',
+      ]);
       expect(el.querySelector('.header__actions a.btn')).toBeNull();
       expect(el.querySelector('.header__actions button.btn')?.textContent?.trim()).toBe(
         'Cerrar sesión',

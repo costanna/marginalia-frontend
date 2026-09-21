@@ -1,0 +1,91 @@
+<section class="history container">
+  <header class="history__head">
+    <div class="history__intro">
+      <h1>{{ 'history.title' | transloco }}</h1>
+      <p class="history__subtitle">{{ 'history.subtitle' | transloco }}</p>
+    </div>
+    <div class="history__filter">
+      <label for="history-level">{{ 'history.filter.label' | transloco }}</label>
+      <select id="history-level" class="select" (change)="setLevel($event)">
+        <option value="" [selected]="!level()">{{ 'history.filter.all' | transloco }}</option>
+        @for (option of levels; track option) {
+          <option [value]="option" [selected]="option === level()">{{ option }}</option>
+        }
+      </select>
+    </div>
+  </header>
+
+  @let current = view();
+  @if (current.status === 'loading') {
+    <div class="history__state" role="status">
+      <p>{{ 'history.loading' | transloco }}</p>
+      <app-skeleton [lines]="5" />
+    </div>
+  } @else if (current.status === 'error') {
+    <div class="history__state">
+      <p class="alert alert--error" role="alert">{{ 'history.loadFailed' | transloco }}</p>
+      <app-button variant="secondary" (click)="retry()">
+        {{ 'history.retry' | transloco }}
+      </app-button>
+    </div>
+  } @else if (current.page.items.length === 0 && current.page.total === 0) {
+    @if (level()) {
+      <app-empty-state title="history.emptyFiltered.title" text="history.emptyFiltered.text">
+        <app-button variant="secondary" (click)="clearFilter()">
+          {{ 'history.emptyFiltered.clear' | transloco }}
+        </app-button>
+      </app-empty-state>
+    } @else {
+      <app-empty-state title="history.empty.title" text="history.empty.text">
+        <a class="btn btn--primary" routerLink="/write">{{ 'history.empty.cta' | transloco }}</a>
+      </app-empty-state>
+    }
+  } @else {
+    <ul class="history__grid">
+      @for (item of current.page.items; track item.id) {
+        <li class="card history-card">
+          <h2 class="history-card__title">
+            <a class="history-card__link" [routerLink]="['/history', item.id]">
+              {{ item.title || ('history.untitled' | transloco) }}
+            </a>
+          </h2>
+          <p class="history-card__date">{{ item.created_at | localDate: language() }}</p>
+          <div class="history-card__meta">
+            <span class="chip">
+              <span class="visually-hidden">{{ 'write.result.level' | transloco }}: </span
+              >{{ item.cefr_level }}
+            </span>
+            <span>{{ 'history.card.words' | transloco: { count: item.word_count } }}</span>
+            <span>
+              {{ 'history.card.corrections' | transloco: { count: item.corrections_count } }}
+            </span>
+          </div>
+        </li>
+      }
+    </ul>
+
+    @if (pages() > 1) {
+      <nav class="pager" [attr.aria-label]="'history.pagination.label' | transloco">
+        <button
+          type="button"
+          class="btn btn--secondary"
+          [disabled]="page() <= 1"
+          (click)="goTo(page() - 1)"
+        >
+          {{ 'history.pagination.previous' | transloco }}
+        </button>
+        <p class="pager__status" aria-live="polite">
+          {{ 'history.pagination.status' | transloco: { page: page(), pages: pages() } }}
+        </p>
+        <button
+          type="button"
+          class="btn btn--secondary"
+          [disabled]="page() >= pages()"
+          (click)="goTo(page() + 1)"
+        >
+          {{ 'history.pagination.next' | transloco }}
+        </button>
+      </nav>
+    }
+  }
+</section>

@@ -4,7 +4,8 @@
   },
   "common": {
     "loading": "Carregant…",
-    "close": "Tanca"
+    "close": "Tanca",
+    "cancel": "Cancel·la"
   },
   "nav": {
     "write": "Escriure",
@@ -154,6 +155,86 @@
       "betterSo": "Gairebé. Millor així:",
       "rule": "Regla",
       "detailTitle": "Correcció"
+    }
+  },
+  "history": {
+    "title": "Historial",
+    "subtitle": "Tots els textos que has corregit, del més recent al més antic.",
+    "filter": {
+      "label": "Nivell",
+      "all": "Tots els nivells"
+    },
+    "card": {
+      "words": "Paraules: {{count}}",
+      "corrections": "Correccions: {{count}}"
+    },
+    "untitled": "Text sense títol",
+    "pagination": {
+      "label": "Pàgines",
+      "previous": "Anterior",
+      "next": "Següent",
+      "status": "Pàgina {{page}} de {{pages}}"
+    },
+    "loading": "Carregant els teus textos…",
+    "loadFailed": "No hem pogut carregar els teus textos.",
+    "retry": "Torna-ho a provar",
+    "empty": {
+      "title": "Encara no has desat cap text",
+      "text": "Cada text que corregeixes es desa aquí, perquè el puguis rellegir i veure com millores.",
+      "cta": "Escriu el meu primer text"
+    },
+    "emptyFiltered": {
+      "title": "Cap text d'aquest nivell",
+      "text": "Prova un altre nivell o mostra'ls tots.",
+      "clear": "Mostra tots els nivells"
+    },
+    "detail": {
+      "back": "Torna a l'historial",
+      "writtenOn": "Escrit el {{date}}",
+      "delete": "Elimina el text",
+      "deleteTitle": "Vols eliminar aquest text?",
+      "deleteMessage": "El text i les seves correccions s'eliminaran per sempre. No es pot desfer.",
+      "deleteConfirm": "Elimina",
+      "deleted": "Text eliminat.",
+      "notFound": {
+        "title": "No hem trobat aquest text",
+        "text": "Potser s'ha eliminat.",
+        "cta": "Torna a l'historial"
+      }
+    }
+  },
+  "settings": {
+    "title": "Ajustos",
+    "menu": "Seccions dels ajustos",
+    "sections": {
+      "profile": "Perfil",
+      "preferences": "Aparença i idioma",
+      "data": "Les teves dades",
+      "account": "Elimina el compte"
+    },
+    "profile": {
+      "name": "Nom",
+      "targetLevel": "Nivell objectiu",
+      "targetLevelNone": "Sense definir",
+      "targetLevelHint": "El nivell que vols assolir. Les correccions s'hi adapten.",
+      "save": "Desa els canvis",
+      "saved": "Canvis desats."
+    },
+    "preferences": {
+      "text": "Es desen al teu compte i t'acompanyen a qualsevol dispositiu."
+    },
+    "data": {
+      "text": "Descarrega una còpia de tot el que Marginalia desa sobre tu (el teu perfil, els teus textos i les seves correccions) en un fitxer JSON.",
+      "export": "Exporta les meves dades",
+      "exported": "Les teves dades s'han descarregat."
+    },
+    "account": {
+      "text": "Elimina el teu compte i tots els teus textos. No es pot desfer.",
+      "delete": "Elimina el meu compte",
+      "confirmTitle": "Vols eliminar el teu compte?",
+      "confirmMessage": "El teu perfil, tots els teus textos i les seves correccions s'eliminaran per sempre. Abans pots descarregar una còpia de les teves dades.",
+      "confirmButton": "Sí, elimina-ho tot",
+      "deleted": "El teu compte s'ha eliminat."
     }
   },
   "notFound": {

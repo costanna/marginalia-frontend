@@ -42,6 +42,9 @@ import { AUTHOR_HANDLE, AUTHOR_URL } from '../../core/config/site.config';
     }
 
     a {
+      @include m.touch-target;
+      display: inline-flex;
+      align-items: center;
       color: var(--text-muted);
       text-underline-offset: 0.2em;
     }
