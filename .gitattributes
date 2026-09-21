@@ -1,0 +1,5 @@
+# Always LF in the repository AND in the working tree, so Prettier/ESLint agree on every OS.
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.woff2 binary
