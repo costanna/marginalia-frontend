@@ -58,6 +58,13 @@
         "title": "Pràctica a mida",
         "text": "Exercicis creats a partir dels errors que més repeteixes."
       }
+    },
+    "demo": {
+      "title": "Prova-ho ara",
+      "subtitle": "Sense registrar-te. Fins a 3 anàlisis al dia.",
+      "useSample": "Fes servir un exemple",
+      "sample": "Yesterday I go to the cinema with my friends. We watched a interesting film and I has enjoyed it very much.",
+      "cta": "T'ha agradat? Crea un compte per desar els teus textos i seguir el teu progrés."
     }
   },
   "auth": {
@@ -116,11 +123,69 @@
   "write": {
     "title": "Escriure",
     "welcome": "Hola, {{name}}!",
-    "comingSoon": "Aquí podràs escriure els teus textos i rebre les correccions. Ho estem preparant."
+    "titleLabel": "Títol (opcional)",
+    "textLabel": "El teu text en anglès",
+    "textPlaceholder": "Escriu aquí el teu text en anglès…",
+    "submit": "Corregir",
+    "analyzing": "Analitzant el teu text…",
+    "edit": "Edita el text",
+    "new": "Text nou",
+    "tabs": {
+      "text": "Text",
+      "corrections": "Correccions ({{count}})"
+    },
+    "result": {
+      "label": "Resultat de l'anàlisi",
+      "level": "Nivell estimat",
+      "words": "{{count}} paraules",
+      "summary": "Nota del professor",
+      "noCorrections": "Sense correccions! El teu text està molt bé.",
+      "corrections": "Correccions ({{count}})",
+      "hint": "Prem una marca del text per veure'n la correcció.",
+      "applyAll": "Aplica-les totes",
+      "apply": "Aplica",
+      "undo": "Desfés",
+      "applied": "Aplicada",
+      "copy": "Copia el text",
+      "copied": "Text copiat.",
+      "copyFailed": "No s'ha pogut copiar. Selecciona el text i copia'l a mà.",
+      "original": "Original",
+      "betterSo": "Gairebé. Millor així:",
+      "rule": "Regla",
+      "detailTitle": "Correcció"
+    }
   },
   "notFound": {
     "title": "Aquesta pàgina no existeix",
     "text": "Potser l'adreça és incorrecta o la pàgina s'ha mogut.",
     "back": "Torna a l'inici"
+  },
+  "categories": {
+    "grammar": "Gramàtica",
+    "spelling": "Ortografia",
+    "vocabulary": "Vocabulari",
+    "punctuation": "Puntuació",
+    "style": "Estil i registre"
+  },
+  "rules": {
+    "verb_tense": "Temps verbal",
+    "subject_verb_agreement": "Concordança subjecte-verb",
+    "articles": "Articles",
+    "prepositions": "Preposicions",
+    "word_order": "Ordre de les paraules",
+    "plural_nouns": "Plurals",
+    "pronouns": "Pronoms",
+    "modal_verbs": "Verbs modals",
+    "conditionals": "Condicionals",
+    "passive_voice": "Veu passiva",
+    "phrasal_verbs": "Verbs frasals",
+    "collocations": "Col·locacions",
+    "false_friends": "Falsos amics",
+    "spelling_common": "Errors d'ortografia freqüents",
+    "punctuation_commas": "Comes i puntuació",
+    "capitalization": "Majúscules",
+    "register_formal": "Registre formal",
+    "run_on_sentence": "Oracions sense separar",
+    "other": "Altres"
   }
 }

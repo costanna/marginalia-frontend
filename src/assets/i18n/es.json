@@ -58,6 +58,13 @@
         "title": "Práctica a tu medida",
         "text": "Ejercicios creados a partir de los errores que más repites."
       }
+    },
+    "demo": {
+      "title": "Pruébalo ahora",
+      "subtitle": "Sin registrarte. Hasta 3 análisis al día.",
+      "useSample": "Usar un ejemplo",
+      "sample": "Yesterday I go to the cinema with my friends. We watched a interesting film and I has enjoyed it very much.",
+      "cta": "¿Te ha gustado? Crea una cuenta para guardar tus textos y seguir tu progreso."
     }
   },
   "auth": {
@@ -116,11 +123,69 @@
   "write": {
     "title": "Escribir",
     "welcome": "¡Hola, {{name}}!",
-    "comingSoon": "Aquí podrás escribir tus textos y recibir las correcciones. Lo estamos preparando."
+    "titleLabel": "Título (opcional)",
+    "textLabel": "Tu texto en inglés",
+    "textPlaceholder": "Escribe aquí tu texto en inglés…",
+    "submit": "Corregir",
+    "analyzing": "Analizando tu texto…",
+    "edit": "Editar texto",
+    "new": "Texto nuevo",
+    "tabs": {
+      "text": "Texto",
+      "corrections": "Correcciones ({{count}})"
+    },
+    "result": {
+      "label": "Resultado del análisis",
+      "level": "Nivel estimado",
+      "words": "{{count}} palabras",
+      "summary": "Nota del profesor",
+      "noCorrections": "¡Sin correcciones! Tu texto está muy bien.",
+      "corrections": "Correcciones ({{count}})",
+      "hint": "Pulsa una marca del texto para ver su corrección.",
+      "applyAll": "Aplicar todas",
+      "apply": "Aplicar",
+      "undo": "Deshacer",
+      "applied": "Aplicada",
+      "copy": "Copiar texto",
+      "copied": "Texto copiado.",
+      "copyFailed": "No se ha podido copiar. Selecciona el texto y cópialo a mano.",
+      "original": "Original",
+      "betterSo": "Casi. Mejor así:",
+      "rule": "Regla",
+      "detailTitle": "Corrección"
+    }
   },
   "notFound": {
     "title": "Esta página no existe",
     "text": "Quizá la dirección es incorrecta o la página se ha movido.",
     "back": "Volver al inicio"
+  },
+  "categories": {
+    "grammar": "Gramática",
+    "spelling": "Ortografía",
+    "vocabulary": "Vocabulario",
+    "punctuation": "Puntuación",
+    "style": "Estilo y registro"
+  },
+  "rules": {
+    "verb_tense": "Tiempo verbal",
+    "subject_verb_agreement": "Concordancia sujeto-verbo",
+    "articles": "Artículos",
+    "prepositions": "Preposiciones",
+    "word_order": "Orden de palabras",
+    "plural_nouns": "Plurales",
+    "pronouns": "Pronombres",
+    "modal_verbs": "Verbos modales",
+    "conditionals": "Condicionales",
+    "passive_voice": "Voz pasiva",
+    "phrasal_verbs": "Verbos frasales",
+    "collocations": "Colocaciones",
+    "false_friends": "Falsos amigos",
+    "spelling_common": "Errores de ortografía frecuentes",
+    "punctuation_commas": "Comas y puntuación",
+    "capitalization": "Mayúsculas",
+    "register_formal": "Registro formal",
+    "run_on_sentence": "Oraciones sin separar",
+    "other": "Otros"
   }
 }

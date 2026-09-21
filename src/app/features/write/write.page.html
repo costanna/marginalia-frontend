@@ -1,0 +1,47 @@
+<section class="write container">
+  <header class="write__head">
+    <h1>{{ 'write.title' | transloco }}</h1>
+    @if (auth.user(); as user) {
+      <p class="write__welcome">{{ 'write.welcome' | transloco: { name: user.display_name } }}</p>
+    }
+  </header>
+
+  @if (shownResult(); as result) {
+    <div class="write__bar">
+      <button type="button" class="btn btn--secondary" (click)="edit()">
+        {{ 'write.edit' | transloco }}
+      </button>
+      <button type="button" class="btn btn--ghost" (click)="startNew()">
+        {{ 'write.new' | transloco }}
+      </button>
+    </div>
+    <app-analysis-result [result]="result" />
+  } @else {
+    <form class="card write__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      @if (errorKey(); as key) {
+        <p class="alert alert--error" role="alert">{{ key | transloco: errorParams() }}</p>
+      }
+      <app-form-field [control]="form.controls.title" label="write.titleLabel" />
+      <app-form-field
+        [control]="form.controls.text"
+        label="write.textLabel"
+        placeholder="write.textPlaceholder"
+        [multiline]="true"
+        [rows]="10"
+        [counterMax]="maxChars"
+        [required]="true"
+      />
+      <p class="write__privacy">{{ 'home.privacy' | transloco }}</p>
+      <app-button type="submit" [loading]="state() === 'loading'">
+        {{ 'write.submit' | transloco }}
+      </app-button>
+    </form>
+
+    @if (state() === 'loading') {
+      <div class="write__loading" role="status">
+        <p>{{ 'write.analyzing' | transloco }}</p>
+        <app-skeleton [lines]="5" />
+      </div>
+    }
+  }
+</section>

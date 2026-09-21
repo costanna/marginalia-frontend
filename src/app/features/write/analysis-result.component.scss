@@ -1,0 +1,271 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: block;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.all-good {
+  padding: var(--sp-16);
+  border: 1px solid var(--success);
+  border-radius: var(--radius-card);
+  color: var(--success);
+  font-weight: 600;
+}
+
+// --- Tabs (below the desktop breakpoint) ---
+.tabs {
+  display: flex;
+  gap: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  @include m.touch-target;
+  padding: var(--sp-8) var(--sp-16);
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+
+  &[aria-selected='true'] {
+    border-bottom-color: var(--primary);
+    color: var(--text);
+  }
+}
+
+// --- Layout: one column on phones, text 60% / corrections 40% on desktop ---
+.layout {
+  display: grid;
+  gap: var(--sp-16);
+
+  @include m.up(lg) {
+    grid-template-columns: 3fr 2fr;
+    align-items: start;
+    gap: var(--sp-24);
+  }
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  min-width: 0;
+}
+
+.panel {
+  @include m.up(lg) {
+    // The list scrolls by itself, so the text stays in view while you read the corrections.
+    position: sticky;
+    top: calc(4.5rem + var(--sp-8));
+    max-height: calc(100dvh - 6rem);
+    overflow-y: auto;
+    padding-inline-end: var(--sp-4);
+  }
+}
+
+// A heading built with role="heading", so its level can follow the page (see headingLevel).
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// --- The annotated text ---
+.annotated {
+  font-family: var(--font-serif);
+  font-size: var(--text-writing);
+  line-height: var(--line-writing);
+  white-space: pre-wrap;
+}
+
+// Every category has its own colour AND underline style, so meaning never depends on colour alone.
+.mark {
+  --c: var(--text-muted);
+  display: inline;
+  margin: 0;
+  padding: 0 1px;
+  border: 0;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--c) var(--mark-alpha), transparent);
+  color: inherit;
+  font: inherit;
+  text-decoration: underline var(--c);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  white-space: inherit;
+  cursor: pointer;
+
+  &[data-category='grammar'] {
+    --c: var(--cat-grammar);
+    text-decoration-style: wavy;
+  }
+
+  &[data-category='spelling'] {
+    --c: var(--cat-spelling);
+    text-decoration-style: dotted;
+  }
+
+  &[data-category='vocabulary'] {
+    --c: var(--cat-vocabulary);
+    text-decoration-style: dashed;
+  }
+
+  &[data-category='punctuation'] {
+    --c: var(--cat-punctuation);
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+  }
+
+  &[data-category='style'] {
+    --c: var(--cat-style);
+    text-decoration-style: double;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--c) 30%, transparent);
+  }
+}
+
+.mark--selected {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+// An applied correction shows the new wording, marked by a solid green underline and bold.
+.mark--applied {
+  --c: var(--success) !important;
+  background: color-mix(in srgb, var(--success) 16%, transparent);
+  font-weight: 600;
+  text-decoration-style: solid !important;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+
+  .btn {
+    flex: 1 1 10rem;
+  }
+
+  @include m.up(md) {
+    .btn {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+// --- Bottom sheet (a modal <dialog>): the detail of a tapped mark on a phone ---
+.sheet {
+  position: fixed;
+  inset: auto 0 0;
+  width: 100%;
+  max-width: none;
+  max-height: 80dvh;
+  margin: 0;
+  padding: var(--sp-16);
+  padding-bottom: calc(var(--sp-16) + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-overlay);
+
+  &::backdrop {
+    background: rgb(14 17 32 / 50%);
+  }
+
+  &[open] {
+    animation: slide-up var(--transition-slow);
+  }
+
+  // On desktop the corrections panel is always visible: no sheet.
+  @include m.up(lg) {
+    display: none !important;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-8);
+}
+
+.sheet__title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.sheet__close {
+  @include m.touch-target;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+}

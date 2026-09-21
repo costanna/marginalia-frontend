@@ -1,0 +1,80 @@
+@use 'styles/mixins' as m;
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+}
+
+.demo__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  text-align: center;
+
+  p {
+    color: var(--text-muted);
+  }
+}
+
+.demo__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.demo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+  justify-content: space-between;
+
+  .btn {
+    flex: 1 1 10rem;
+  }
+
+  app-button {
+    flex: 1 1 10rem;
+  }
+
+  @include m.up(md) {
+    justify-content: flex-end;
+
+    .btn,
+    app-button {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.demo__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+
+  p {
+    color: var(--text-muted);
+    text-align: center;
+  }
+}
+
+.demo__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  align-items: center;
+  text-align: center;
+}
+
+.demo__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+  justify-content: center;
+}

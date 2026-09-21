@@ -1,0 +1,49 @@
+<section class="demo" aria-labelledby="demo-title">
+  <div class="demo__intro">
+    <h2 id="demo-title">{{ 'home.demo.title' | transloco }}</h2>
+    <p>{{ 'home.demo.subtitle' | transloco }}</p>
+  </div>
+
+  @if (result(); as result) {
+    <app-analysis-result [result]="result" [headingLevel]="3" />
+    <div class="card demo__cta">
+      <p>{{ 'home.demo.cta' | transloco }}</p>
+      <div class="demo__cta-actions">
+        <a class="btn btn--primary" routerLink="/register">{{ 'home.ctaRegister' | transloco }}</a>
+        <button type="button" class="btn btn--secondary" (click)="tryAgain()">
+          {{ 'write.edit' | transloco }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <form class="card demo__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      @if (errorKey(); as key) {
+        <p class="alert alert--error" role="alert">{{ key | transloco: errorParams() }}</p>
+      }
+      <app-form-field
+        [control]="form.controls.text"
+        label="write.textLabel"
+        placeholder="write.textPlaceholder"
+        [multiline]="true"
+        [rows]="6"
+        [counterMax]="maxChars"
+        [required]="true"
+      />
+      <div class="demo__actions">
+        <button type="button" class="btn btn--secondary" (click)="useSample()">
+          {{ 'home.demo.useSample' | transloco }}
+        </button>
+        <app-button type="submit" [loading]="loading()">{{
+          'write.submit' | transloco
+        }}</app-button>
+      </div>
+    </form>
+
+    @if (loading()) {
+      <div class="demo__loading" role="status">
+        <p>{{ 'write.analyzing' | transloco }}</p>
+        <app-skeleton [lines]="4" />
+      </div>
+    }
+  }
+</section>

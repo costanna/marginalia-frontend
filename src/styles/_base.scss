@@ -127,3 +127,8 @@ app-root {
   flex: 1 0 auto;
   flex-direction: column;
 }
+
+// `hidden` must win over any `display` set by component styles (tabs, panes...).
+[hidden] {
+  display: none !important;
+}
