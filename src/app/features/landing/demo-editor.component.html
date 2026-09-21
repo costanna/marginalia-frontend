@@ -5,7 +5,7 @@
   </div>
 
   @if (result(); as result) {
-    <app-analysis-result [result]="result" />
+    <app-analysis-result [result]="result" [headingLevel]="3" />
     <div class="card demo__cta">
       <p>{{ 'home.demo.cta' | transloco }}</p>
       <div class="demo__cta-actions">

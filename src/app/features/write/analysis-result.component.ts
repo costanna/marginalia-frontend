@@ -42,6 +42,12 @@ const TABS: readonly Tab[] = ['text', 'corrections'];
 })
 export class AnalysisResultComponent {
   readonly result = input.required<AnalysisResult>();
+  /**
+   * The level of the section headings ("Teacher's note", "Corrections"). It depends on where the
+   * result is shown: under the page's <h1> they are <h2>; inside the landing demo, which has its own
+   * <h2>, they are <h3>. Skipping a level would confuse screen-reader navigation by headings.
+   */
+  readonly headingLevel = input<2 | 3>(2);
 
   private readonly breakpoint = inject(BreakpointService);
   private readonly toasts = inject(ToastService);

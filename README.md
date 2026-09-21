@@ -5,8 +5,8 @@
 Web app for **Marginalia**, an AI-powered English corrector that annotates a learner's text like a
 teacher's margin notes, estimates the CEFR level and builds personalised exercises.
 
-> Status: **Phase 3 (frontend base)** done: design system, light/dark theme, three languages,
-> layout, landing, sign-up and login. The writing screen arrives in Phase 4.
+> Status: **Phase 4 (writing screen)** done: write a text, get it analysed and read it annotated,
+> apply corrections and copy the result; the landing has a try-it-now box. Next: history and settings.
 
 Backend: [marginalia-backend](https://github.com/costanna/marginalia-backend)
 
@@ -43,7 +43,7 @@ src/
     core/       api (ApiService, interceptors), auth, i18n, theme, preferences, toast, config
     shared/ui/  reusable components: button, form field, logo, theme toggle, language switcher...
     layout/     header (with the mobile side panel), footer, shell
-    features/   landing, auth (login, register), write, not-found
+    features/   landing (with the demo), auth (login, register), write (form, annotated result), not-found
   assets/i18n/  ca.json, es.json, en.json
   styles/       tokens, themes (light/dark), base, components
 ```
@@ -76,6 +76,17 @@ src/
 - **`returnUrl` is validated** so the login page cannot be used as an open redirect.
 - **Preferences are saved on explicit user actions**, not by watching signals: the language loads
   asynchronously, and watching it would let a not-yet-switched value overwrite the saved one.
+- **Offsets are converted once, in a pure function.** The API counts Unicode code points (Python),
+  JavaScript strings count UTF-16 units: an emoji is one and two. `buildSegments` converts them and is
+  tested with emoji, ZWJ sequences, accents, CJK and 200 random round-trips. Checked end to end in a
+  real browser: with an emoji before the mistakes, every mark falls exactly on the fragment the server
+  located, and "copy text" after "apply all" is identical to the server's `corrected_text`.
+- **The learner's text and the model's explanations are never HTML.** Marks and text use
+  `[textContent]` (no `innerHTML`); a test feeds `<img onerror>` and `<script>` and checks nothing runs.
+  `[textContent]` also avoids the whitespace Angular adds around an interpolation, which would show as
+  spaces inside inline marks.
+- **Categories are told apart by colour AND underline style** (wavy, dotted, dashed, solid, double),
+  and the same headings work under any page: their level (`h2`/`h3`) is an input.
 - **Native controls where they are best**: the language menu is a `<select>`, the mobile menu is a
   modal `<dialog>` (focus trap and Escape for free).
 

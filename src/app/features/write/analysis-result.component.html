@@ -5,7 +5,9 @@
   </div>
 
   <div class="card note">
-    <h3>{{ 'write.result.summary' | transloco }}</h3>
+    <div class="section-title" role="heading" [attr.aria-level]="headingLevel()">
+      {{ 'write.result.summary' | transloco }}
+    </div>
     <p>{{ result().summary }}</p>
   </div>
 
@@ -92,9 +94,9 @@
         [attr.aria-labelledby]="isDesktop() ? null : 'result-tab-corrections'"
         [hidden]="paneHidden('corrections')"
       >
-        <h3 class="panel__title">
+        <div class="section-title" role="heading" [attr.aria-level]="headingLevel()">
           {{ 'write.result.corrections' | transloco: { count: items().length } }}
-        </h3>
+        </div>
         <ul class="list">
           @for (item of items(); track item.key) {
             <li [id]="'correction-' + item.key">

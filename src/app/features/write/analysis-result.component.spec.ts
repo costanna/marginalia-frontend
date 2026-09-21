@@ -95,7 +95,9 @@ describe('AnalysisResultComponent', () => {
 
       expect(el.textContent).toContain('Nivel estimado: A2');
       expect(el.textContent).toContain('13 palabras');
-      expect(el.querySelector('.note h3')?.textContent?.trim()).toBe('Nota del profesor');
+      expect(el.querySelector('.note .section-title')?.textContent?.trim()).toBe(
+        'Nota del profesor',
+      );
       expect(el.querySelector('.note p')?.textContent?.trim()).toBe('Good start, keep going.');
     });
 
@@ -104,6 +106,23 @@ describe('AnalysisResultComponent', () => {
 
       expect(q('.result').getAttribute('aria-label')).toBe('Resultado del análisis');
       expect(q('.result').getAttribute('tabindex')).toBe('-1');
+    });
+  });
+
+  describe('headings', () => {
+    it('are level 2 by default (under the page heading)', async () => {
+      const { all } = await render(resultWith(THREE()));
+
+      expect(all('[role="heading"]').map((h) => h.getAttribute('aria-level'))).toEqual(['2', '2']);
+    });
+
+    it('can be level 3 when shown under another section heading (the landing demo)', async () => {
+      const { fixture, all, settle } = await render(resultWith(THREE()));
+
+      fixture.componentRef.setInput('headingLevel', 3);
+      await settle();
+
+      expect(all('[role="heading"]').map((h) => h.getAttribute('aria-level'))).toEqual(['3', '3']);
     });
   });
 
@@ -194,7 +213,7 @@ describe('AnalysisResultComponent', () => {
     it('shows the number of corrections', async () => {
       const { q } = await render(resultWith(THREE()));
 
-      expect(q('.panel__title').textContent?.trim()).toBe('Correcciones (3)');
+      expect(q('.panel .section-title').textContent?.trim()).toBe('Correcciones (3)');
     });
 
     it('is translated into the other languages', async () => {
@@ -203,7 +222,7 @@ describe('AnalysisResultComponent', () => {
       await TestBed.inject(LanguageService).setLanguage('en');
       await settle();
 
-      expect(q('.panel__title').textContent?.trim()).toBe('Corrections (3)');
+      expect(q('.panel .section-title').textContent?.trim()).toBe('Corrections (3)');
       expect(fixture.nativeElement.textContent).toContain('Estimated level: A2');
     });
   });

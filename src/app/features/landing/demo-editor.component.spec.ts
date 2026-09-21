@@ -137,6 +137,21 @@ describe('DemoEditorComponent', () => {
     expect(el.querySelector('.demo__cta a')?.getAttribute('href')).toBe('/register');
   });
 
+  it('keeps the heading order: its own <h2>, then <h3> inside the result', async () => {
+    const { el, submit, backend, type, settle } = await render();
+    type('Yesterday I go to the cinema with friends.');
+    await submit();
+    backend.expectOne(`${API}/demo/analyze`).flush(RESULT);
+    await settle();
+
+    expect(el.querySelector('h2')?.textContent?.trim()).toBe('Pruébalo ahora');
+    expect(
+      [...el.querySelectorAll('app-analysis-result [role="heading"]')].map((h) =>
+        h.getAttribute('aria-level'),
+      ),
+    ).toEqual(['3', '3']);
+  });
+
   it('works with corrections that have no id (the demo saves nothing)', async () => {
     const { el, submit, backend, type, settle } = await render();
     type('Yesterday I go to the cinema with friends.');
