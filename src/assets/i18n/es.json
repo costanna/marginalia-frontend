@@ -1,0 +1,127 @@
+{
+  "app": {
+    "name": "Marginalia"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "close": "Cerrar"
+  },
+  "nav": {
+    "write": "Escribir",
+    "history": "Historial",
+    "practice": "Practicar",
+    "progress": "Progreso",
+    "settings": "Ajustes",
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta",
+    "logout": "Cerrar sesión",
+    "menu": "Menú",
+    "closeMenu": "Cerrar menú",
+    "main": "Navegación principal",
+    "skip": "Saltar al contenido",
+    "goHome": "Marginalia, ir al inicio"
+  },
+  "theme": {
+    "label": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "switchToDark": "Cambiar al tema oscuro",
+    "switchToLight": "Cambiar al tema claro"
+  },
+  "language": {
+    "label": "Idioma",
+    "ca": "Català",
+    "es": "Castellano",
+    "en": "English"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "author": "Autora"
+  },
+  "home": {
+    "tagline": "Aprende inglés escribiendo.",
+    "subtitle": "Escribe un texto en inglés y recibe correcciones explicadas, como las notas que un profesor escribe al margen.",
+    "ctaRegister": "Empieza gratis",
+    "ctaLogin": "Ya tengo cuenta",
+    "privacy": "El texto que escribas se envía a un proveedor de IA para analizarlo. Puedes borrar tu cuenta y todos tus datos cuando quieras.",
+    "features": {
+      "title": "Qué encontrarás",
+      "corrections": {
+        "title": "Correcciones que enseñan",
+        "text": "Cada error viene con una explicación breve en tu idioma, no solo con la respuesta."
+      },
+      "level": {
+        "title": "Tu nivel, a la vista",
+        "text": "Estimamos tu nivel (de A1 a C2) con cada texto y seguimos tu progreso."
+      },
+      "practice": {
+        "title": "Práctica a tu medida",
+        "text": "Ejercicios creados a partir de los errores que más repites."
+      }
+    }
+  },
+  "auth": {
+    "fields": {
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "passwordHint": "Al menos 8 caracteres.",
+      "displayName": "Nombre"
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Qué bien volver a verte.",
+      "submit": "Entrar",
+      "switchPrompt": "¿Aún no tienes cuenta?",
+      "switchLink": "Crea una"
+    },
+    "register": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Gratis y sin tarjeta.",
+      "submit": "Crear cuenta",
+      "switchPrompt": "¿Ya tienes cuenta?",
+      "switchLink": "Inicia sesión"
+    }
+  },
+  "form": {
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "email": "Escribe un correo electrónico válido.",
+      "minlength": "Debe tener al menos {{requiredLength}} caracteres.",
+      "maxlength": "Puede tener como máximo {{requiredLength}} caracteres."
+    }
+  },
+  "errors": {
+    "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
+    "unknown": "Algo ha salido mal. Inténtalo de nuevo.",
+    "api": {
+      "validation_error": "Algún dato no es correcto. Revísalos e inténtalo de nuevo.",
+      "invalid_credentials": "El correo o la contraseña no son correctos.",
+      "email_taken": "Ya existe una cuenta con este correo.",
+      "unauthorized": "Tu sesión ha caducado. Vuelve a iniciar sesión.",
+      "not_found": "No hemos encontrado lo que buscabas.",
+      "rate_limit_exceeded": "Demasiados intentos seguidos. Espera un momento e inténtalo de nuevo.",
+      "daily_quota_exceeded": "Has llegado al límite diario de análisis. Vuelve mañana.",
+      "text_too_short": "El texto es demasiado corto (mínimo {{min}} caracteres).",
+      "text_too_long": "El texto es demasiado largo (máximo {{max}} caracteres).",
+      "llm_unavailable": "El servicio de análisis no está disponible ahora mismo. Inténtalo de nuevo en un rato.",
+      "llm_invalid_response": "No hemos podido entender la respuesta del análisis. Inténtalo de nuevo."
+    }
+  },
+  "server": {
+    "waking": "Despertando el servidor… puede tardar hasta un minuto."
+  },
+  "toast": {
+    "close": "Cerrar aviso"
+  },
+  "write": {
+    "title": "Escribir",
+    "welcome": "¡Hola, {{name}}!",
+    "comingSoon": "Aquí podrás escribir tus textos y recibir las correcciones. Lo estamos preparando."
+  },
+  "notFound": {
+    "title": "Esta página no existe",
+    "text": "Quizá la dirección es incorrecta o la página se ha movido.",
+    "back": "Volver al inicio"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "app": {
+    "name": "Marginalia"
+  },
+  "common": {
+    "loading": "Loading…",
+    "close": "Close"
+  },
+  "nav": {
+    "write": "Write",
+    "history": "History",
+    "practice": "Practice",
+    "progress": "Progress",
+    "settings": "Settings",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "main": "Main navigation",
+    "skip": "Skip to content",
+    "goHome": "Marginalia, go to the home page"
+  },
+  "theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "switchToDark": "Switch to dark theme",
+    "switchToLight": "Switch to light theme"
+  },
+  "language": {
+    "label": "Language",
+    "ca": "Català",
+    "es": "Castellano",
+    "en": "English"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "author": "Author"
+  },
+  "home": {
+    "tagline": "Learn English by writing.",
+    "subtitle": "Write a text in English and get explained corrections, like the notes a teacher writes in the margin.",
+    "ctaRegister": "Start for free",
+    "ctaLogin": "I already have an account",
+    "privacy": "The text you write is sent to an AI provider to be analysed. You can delete your account and all your data at any time.",
+    "features": {
+      "title": "What you'll find",
+      "corrections": {
+        "title": "Corrections that teach",
+        "text": "Every mistake comes with a short explanation in your language, not just the answer."
+      },
+      "level": {
+        "title": "Your level at a glance",
+        "text": "We estimate your level (A1 to C2) with every text and track your progress."
+      },
+      "practice": {
+        "title": "Practice made for you",
+        "text": "Exercises built from the mistakes you make most often."
+      }
+    }
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "passwordHint": "At least 8 characters.",
+      "displayName": "Name"
+    },
+    "login": {
+      "title": "Log in",
+      "subtitle": "Good to see you again.",
+      "submit": "Log in",
+      "switchPrompt": "Don't have an account yet?",
+      "switchLink": "Create one"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Free, no card needed.",
+      "submit": "Create account",
+      "switchPrompt": "Already have an account?",
+      "switchLink": "Log in"
+    }
+  },
+  "form": {
+    "errors": {
+      "required": "This field is required.",
+      "email": "Enter a valid email address.",
+      "minlength": "It must have at least {{requiredLength}} characters.",
+      "maxlength": "It can have at most {{requiredLength}} characters."
+    }
+  },
+  "errors": {
+    "network": "We couldn't connect. Check your connection and try again.",
+    "unknown": "Something went wrong. Please try again.",
+    "api": {
+      "validation_error": "Some of the data isn't right. Please check it and try again.",
+      "invalid_credentials": "The email or the password is incorrect.",
+      "email_taken": "An account with this email already exists.",
+      "unauthorized": "Your session has expired. Please log in again.",
+      "not_found": "We couldn't find what you were looking for.",
+      "rate_limit_exceeded": "Too many attempts in a row. Wait a moment and try again.",
+      "daily_quota_exceeded": "You've reached the daily analysis limit. Come back tomorrow.",
+      "text_too_short": "The text is too short (minimum {{min}} characters).",
+      "text_too_long": "The text is too long (maximum {{max}} characters).",
+      "llm_unavailable": "The analysis service isn't available right now. Please try again in a while.",
+      "llm_invalid_response": "We couldn't understand the analysis response. Please try again."
+    }
+  },
+  "server": {
+    "waking": "Waking up the server… this can take up to a minute."
+  },
+  "toast": {
+    "close": "Dismiss notification"
+  },
+  "write": {
+    "title": "Write",
+    "welcome": "Hi, {{name}}!",
+    "comingSoon": "Soon you'll be able to write your texts and get corrections here. We're getting it ready."
+  },
+  "notFound": {
+    "title": "This page doesn't exist",
+    "text": "The address may be wrong, or the page may have moved.",
+    "back": "Back to the home page"
+  }
+}
