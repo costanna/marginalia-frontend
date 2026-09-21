@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ToastService } from '../toast/toast.service';
 import { SILENT_ERRORS } from './api.service';
 import { ApiError, toApiError } from './api-error';
+import { API_ERROR_CODES } from './error-codes';
 
 /**
  * Turns every failed API call into an ApiError with a stable code, and shows it in a translated
@@ -30,13 +31,17 @@ export const errorInterceptor: HttpInterceptorFn = (request, next) => {
   );
 };
 
-/** The translated message for an error; falls back to a generic one for unknown codes. */
+/** The translation key for an error code; unknown codes map to the generic message. */
+export function errorTranslationKey(code: string): string {
+  if (code === 'network' || code === 'unknown') {
+    return `errors.${code}`;
+  }
+  return (API_ERROR_CODES as readonly string[]).includes(code)
+    ? `errors.api.${code}`
+    : 'errors.unknown';
+}
+
+/** The translated message for an error (details, such as a length limit, fill its parameters). */
 export function messageFor(transloco: TranslocoService, error: ApiError): string {
-  const key =
-    error.code === 'network' || error.code === 'unknown'
-      ? `errors.${error.code}`
-      : `errors.api.${error.code}`;
-  const translated = transloco.translate(key, error.details);
-  // Transloco returns the key itself when it is missing (a code the frontend does not know yet).
-  return translated === key ? transloco.translate('errors.unknown') : translated;
+  return transloco.translate(errorTranslationKey(error.code), error.details);
 }

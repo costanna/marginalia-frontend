@@ -1,0 +1,74 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-24);
+  padding-block: var(--sp-48);
+  text-align: center;
+
+  @include m.up(lg) {
+    padding-block: var(--sp-64);
+  }
+}
+
+.hero__title {
+  max-width: 18ch;
+}
+
+// The wavy coral underline of the logo, echoing a teacher's mark under a mistake.
+.hero__underline {
+  text-decoration: underline wavy var(--accent);
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.16em;
+}
+
+.hero__subtitle {
+  max-width: 40rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-12);
+  justify-content: center;
+  width: 100%;
+
+  .btn {
+    flex: 1 1 12rem;
+    max-width: 18rem;
+  }
+}
+
+.features__list {
+  display: grid;
+  gap: var(--sp-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include m.up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-24);
+  }
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+
+  p {
+    color: var(--text-muted);
+  }
+}
+
+.privacy {
+  padding-block: var(--sp-32) var(--sp-48);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}

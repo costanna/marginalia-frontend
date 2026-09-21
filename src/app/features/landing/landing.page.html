@@ -1,0 +1,28 @@
+<section class="hero container">
+  <h1 class="hero__title">
+    <span class="hero__underline">{{ 'home.tagline' | transloco }}</span>
+  </h1>
+  <p class="hero__subtitle">{{ 'home.subtitle' | transloco }}</p>
+  <div class="hero__actions">
+    @if (auth.isAuthenticated()) {
+      <a class="btn btn--primary" routerLink="/write">{{ 'nav.write' | transloco }}</a>
+    } @else {
+      <a class="btn btn--primary" routerLink="/register">{{ 'home.ctaRegister' | transloco }}</a>
+      <a class="btn btn--secondary" routerLink="/login">{{ 'home.ctaLogin' | transloco }}</a>
+    }
+  </div>
+</section>
+
+<section class="features container" aria-labelledby="features-title">
+  <h2 id="features-title" class="visually-hidden">{{ 'home.features.title' | transloco }}</h2>
+  <ul class="features__list">
+    @for (feature of features; track feature) {
+      <li class="card feature">
+        <h3>{{ 'home.features.' + feature + '.title' | transloco }}</h3>
+        <p>{{ 'home.features.' + feature + '.text' | transloco }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<p class="privacy container">{{ 'home.privacy' | transloco }}</p>

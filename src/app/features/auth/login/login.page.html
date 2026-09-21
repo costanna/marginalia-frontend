@@ -1,0 +1,35 @@
+<section class="auth container">
+  <div class="card auth__card">
+    <h1>{{ 'auth.login.title' | transloco }}</h1>
+    <p class="auth__subtitle">{{ 'auth.login.subtitle' | transloco }}</p>
+
+    <form class="auth__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      @if (errorKey(); as key) {
+        <p class="alert alert--error" role="alert">{{ key | transloco: errorParams() }}</p>
+      }
+      <app-form-field
+        [control]="form.controls.email"
+        label="auth.fields.email"
+        type="email"
+        autocomplete="email"
+        inputmode="email"
+        [required]="true"
+      />
+      <app-form-field
+        [control]="form.controls.password"
+        label="auth.fields.password"
+        type="password"
+        autocomplete="current-password"
+        [required]="true"
+      />
+      <app-button type="submit" block [loading]="submitting()">
+        {{ 'auth.login.submit' | transloco }}
+      </app-button>
+    </form>
+
+    <p class="auth__switch">
+      {{ 'auth.login.switchPrompt' | transloco }}
+      <a routerLink="/register">{{ 'auth.login.switchLink' | transloco }}</a>
+    </p>
+  </div>
+</section>

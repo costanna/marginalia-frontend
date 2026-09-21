@@ -1,0 +1,225 @@
+@use 'styles/mixins' as m;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-top: env(safe-area-inset-top, 0px);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-16);
+  min-height: 4rem;
+}
+
+.header__logo {
+  display: inline-flex;
+  border-radius: var(--radius-input);
+  text-decoration: none;
+}
+
+// Mobile: only the logo and the menu button. From md up: the full navigation.
+.header__nav,
+.header__actions {
+  display: none;
+}
+
+.header__menu-button {
+  @include m.touch-target;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+}
+
+@include m.up(md) {
+  .header__nav {
+    display: flex;
+    flex: 1;
+    gap: var(--sp-4);
+    margin-inline-start: var(--sp-16);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-8);
+  }
+
+  .header__menu-button {
+    display: none;
+  }
+}
+
+.nav-link {
+  @include m.touch-target;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-8) var(--sp-12);
+  border-radius: var(--radius-input);
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--surface-alt);
+    color: var(--text);
+  }
+
+  &--active {
+    background: var(--primary-soft);
+    color: var(--text);
+    font-weight: 600;
+  }
+}
+
+// --- Side panel (a modal <dialog>) ---
+.panel {
+  // Docked to the right edge, full height.
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(20rem, 88vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-inline-start: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-overlay);
+
+  &::backdrop {
+    background: rgb(14 17 32 / 50%);
+  }
+
+  &[open] {
+    animation: slide-in var(--transition-slow);
+  }
+
+  // No panel on wide screens: the horizontal navigation replaces it.
+  @include m.up(md) {
+    display: none !important;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+.panel__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  min-height: 100%;
+  padding: var(--sp-16);
+  padding-bottom: calc(var(--sp-16) + env(safe-area-inset-bottom, 0px));
+}
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel__title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.panel__close {
+  @include m.touch-target;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+}
+
+.panel__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.panel__link {
+  @include m.touch-target;
+  display: flex;
+  align-items: center;
+  padding: var(--sp-8) var(--sp-12);
+  border-radius: var(--radius-input);
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--surface-alt);
+    color: var(--text);
+  }
+
+  &--active {
+    background: var(--primary-soft);
+    font-weight: 600;
+  }
+}
+
+.panel__prefs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  padding-block: var(--sp-16);
+  border-block: 1px solid var(--border);
+}
+
+.panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-12);
+}
+
+.panel__account {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  margin-top: auto;
+}

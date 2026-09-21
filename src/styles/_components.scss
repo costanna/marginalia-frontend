@@ -1,0 +1,92 @@
+@use 'mixins' as m;
+
+// Shared building blocks used across pages. Component-specific styles live with their component.
+
+.btn {
+  @include m.touch-target;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-16);
+  border: 1px solid transparent;
+  border-radius: var(--radius-input);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+
+  &--primary {
+    background: var(--primary);
+    color: var(--on-primary);
+
+    &:hover:not(:disabled) {
+      background: var(--primary-hover);
+      color: var(--on-primary);
+    }
+  }
+
+  &--secondary {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+
+    &:hover:not(:disabled) {
+      background: var(--surface-alt);
+      color: var(--text);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--text);
+
+    &:hover:not(:disabled) {
+      background: var(--surface-alt);
+      color: var(--text);
+    }
+  }
+
+  &--danger {
+    background: var(--danger);
+    color: var(--on-primary);
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.92);
+    }
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--sp-24);
+}
+
+.alert {
+  padding: var(--sp-12) var(--sp-16);
+  border: 1px solid currentcolor;
+  border-radius: var(--radius-input);
+  font-size: 0.9375rem;
+
+  &--error {
+    color: var(--danger);
+    background: color-mix(in srgb, var(--danger) 8%, var(--surface));
+  }
+}
