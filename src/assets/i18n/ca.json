@@ -109,11 +109,12 @@
       "unauthorized": "La sessió ha caducat. Torna a iniciar-la.",
       "not_found": "No hem trobat el que buscaves.",
       "rate_limit_exceeded": "Massa intents seguits. Espera un moment i torna-ho a provar.",
-      "daily_quota_exceeded": "Has arribat al límit diari d'anàlisis. Torna demà.",
+      "daily_quota_exceeded": "Has arribat al límit diari. Torna demà.",
       "text_too_short": "El text és massa curt (mínim {{min}} caràcters).",
       "text_too_long": "El text és massa llarg (màxim {{max}} caràcters).",
-      "llm_unavailable": "El servei d'anàlisi no està disponible ara mateix. Torna-ho a provar d'aquí a una estona.",
-      "llm_invalid_response": "No hem pogut entendre la resposta de l'anàlisi. Torna-ho a provar."
+      "llm_unavailable": "El servei d'IA no està disponible ara mateix. Torna-ho a provar d'aquí a una estona.",
+      "llm_invalid_response": "No hem pogut entendre la resposta de la IA. Torna-ho a provar.",
+      "exercise_already_attempted": "Aquest exercici ja s'havia respost."
     }
   },
   "server": {
@@ -201,6 +202,32 @@
         "text": "Potser s'ha eliminat.",
         "cta": "Torna a l'historial"
       }
+    }
+  },
+  "practice": {
+    "title": "Practicar",
+    "subtitle": "Exercicis creats a partir dels errors que més repeteixes.",
+    "loading": "Preparant els teus exercicis…",
+    "loadFailed": "No hem pogut carregar els teus exercicis.",
+    "retry": "Torna-ho a provar",
+    "empty": {
+      "title": "Encara no tens exercicis",
+      "text": "Escriu i corregeix un text primer: els exercicis es creen a partir dels teus propis errors.",
+      "cta": "Escriu el meu primer text"
+    },
+    "progress": "Exercici {{current}} de {{total}}",
+    "answerLabel": "La teva resposta",
+    "check": "Comprova",
+    "correct": "Correcte!",
+    "incorrect": "No és correcte.",
+    "correctAnswerWas": "La resposta correcta és: {{answer}}",
+    "continue": "Continua",
+    "rule": "Regla",
+    "summary": {
+      "title": "Resum de la sessió",
+      "score": "Has encertat {{correct}} de {{total}}.",
+      "again": "Practica més",
+      "done": "Torna a escriure"
     }
   },
   "settings": {

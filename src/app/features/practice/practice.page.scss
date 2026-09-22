@@ -1,0 +1,178 @@
+@use 'styles/mixins' as m;
+
+// One exercise fills the screen at every width (spec section 8): a single centred column, capped
+// at 640px, never the wide two-column layouts used by write or history.
+.practice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-16);
+  padding-block: var(--sp-24) var(--sp-48);
+  text-align: center;
+
+  @include m.up(lg) {
+    padding-block: var(--sp-32) var(--sp-64);
+  }
+}
+
+.practice__subtitle {
+  max-width: 40rem;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.practice__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-12);
+  width: 100%;
+  max-width: 40rem;
+  text-align: start;
+
+  p {
+    margin: 0;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .alert {
+    color: var(--danger);
+  }
+}
+
+.practice__progress {
+  margin: 0;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.exercise,
+.session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-16);
+  width: 100%;
+  max-width: 40rem;
+  text-align: center;
+}
+
+.exercise__prompt {
+  font-size: 1.375rem;
+  line-height: 1.4;
+}
+
+.exercise__prompt:focus,
+.session__title:focus {
+  outline: none;
+}
+
+// Options and the check button fill the card's width on every screen (spec: "botones a ancho
+// completo"), not just on mobile.
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  width: 100%;
+}
+
+.option {
+  @include m.touch-target;
+  width: 100%;
+  justify-content: flex-start;
+  padding-inline: var(--sp-16);
+  text-align: start;
+}
+
+// Colour is never the only signal: a check/cross mark carries the same meaning (see the ::before
+// content below, built with characters rather than an image so it survives without extra markup).
+.option--correct {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 12%, var(--surface));
+  color: var(--success);
+  font-weight: 600;
+
+  &::before {
+    content: '✓ ';
+  }
+}
+
+.option--wrong {
+  border-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, var(--surface));
+  color: var(--danger);
+  font-weight: 600;
+
+  &::before {
+    content: '✗ ';
+  }
+}
+
+.fill-blank {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  width: 100%;
+  text-align: start;
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  width: 100%;
+  padding: var(--sp-16);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  text-align: start;
+
+  app-button {
+    margin-top: var(--sp-8);
+  }
+}
+
+.feedback--correct {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
+}
+
+.feedback--incorrect {
+  border-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 8%, var(--surface));
+}
+
+.feedback__verdict {
+  margin: 0;
+  font-weight: 700;
+}
+
+.feedback--correct .feedback__verdict {
+  color: var(--success);
+}
+
+.feedback--incorrect .feedback__verdict {
+  color: var(--danger);
+}
+
+.feedback__answer,
+.feedback__explanation {
+  margin: 0;
+  color: var(--text);
+}
+
+.session__title {
+  font-size: 1.5rem;
+}
+
+.session__score {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.session__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  width: 100%;
+}

@@ -109,11 +109,12 @@
       "unauthorized": "Your session has expired. Please log in again.",
       "not_found": "We couldn't find what you were looking for.",
       "rate_limit_exceeded": "Too many attempts in a row. Wait a moment and try again.",
-      "daily_quota_exceeded": "You've reached the daily analysis limit. Come back tomorrow.",
+      "daily_quota_exceeded": "You've reached today's limit for this. Come back tomorrow.",
       "text_too_short": "The text is too short (minimum {{min}} characters).",
       "text_too_long": "The text is too long (maximum {{max}} characters).",
-      "llm_unavailable": "The analysis service isn't available right now. Please try again in a while.",
-      "llm_invalid_response": "We couldn't understand the analysis response. Please try again."
+      "llm_unavailable": "The AI service isn't available right now. Please try again in a while.",
+      "llm_invalid_response": "We couldn't understand the AI's response. Please try again.",
+      "exercise_already_attempted": "This exercise has already been answered."
     }
   },
   "server": {
@@ -201,6 +202,32 @@
         "text": "It may have been deleted.",
         "cta": "Back to history"
       }
+    }
+  },
+  "practice": {
+    "title": "Practice",
+    "subtitle": "Exercises built from the mistakes you make most often.",
+    "loading": "Preparing your exercises…",
+    "loadFailed": "We couldn't load your exercises.",
+    "retry": "Try again",
+    "empty": {
+      "title": "You don't have any exercises yet",
+      "text": "Write and check a text first: exercises are built from your own mistakes.",
+      "cta": "Write my first text"
+    },
+    "progress": "Exercise {{current}} of {{total}}",
+    "answerLabel": "Your answer",
+    "check": "Check",
+    "correct": "Correct!",
+    "incorrect": "Not quite.",
+    "correctAnswerWas": "The correct answer is: {{answer}}",
+    "continue": "Continue",
+    "rule": "Rule",
+    "summary": {
+      "title": "Session summary",
+      "score": "You got {{correct}} out of {{total}} right.",
+      "again": "Practice more",
+      "done": "Back to writing"
     }
   },
   "settings": {

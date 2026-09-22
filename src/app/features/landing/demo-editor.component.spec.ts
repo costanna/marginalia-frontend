@@ -193,7 +193,7 @@ describe('DemoEditorComponent', () => {
     await settle();
 
     expect(el.querySelector('form > .alert')?.textContent?.trim()).toBe(
-      'Has llegado al límite diario de análisis. Vuelve mañana.',
+      'Has llegado al límite diario. Vuelve mañana.',
     );
   });
 
