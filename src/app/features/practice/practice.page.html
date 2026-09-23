@@ -1,0 +1,133 @@
+<section class="practice container">
+  <h1>{{ 'practice.title' | transloco }}</h1>
+  <p class="practice__subtitle">{{ 'practice.subtitle' | transloco }}</p>
+
+  @switch (status()) {
+    @case ('loading') {
+      <div class="practice__state" role="status">
+        <p>{{ 'practice.loading' | transloco }}</p>
+        <app-skeleton [lines]="4" />
+      </div>
+    }
+    @case ('error') {
+      <div class="practice__state">
+        <p class="alert alert--error" role="alert">{{ 'practice.loadFailed' | transloco }}</p>
+        <app-button variant="secondary" (click)="load()">
+          {{ 'practice.retry' | transloco }}
+        </app-button>
+      </div>
+    }
+    @case ('empty') {
+      <app-empty-state title="practice.empty.title" text="practice.empty.text">
+        <a class="btn btn--primary" routerLink="/write">{{ 'practice.empty.cta' | transloco }}</a>
+      </app-empty-state>
+    }
+    @case ('active') {
+      @if (phase() === 'summary') {
+        <div class="card session">
+          <h2 #heading class="session__title" tabindex="-1">
+            {{ 'practice.summary.title' | transloco }}
+          </h2>
+          <p class="session__score">
+            {{ 'practice.summary.score' | transloco: { correct: correctCount(), total: total() } }}
+          </p>
+          <div class="session__actions">
+            <app-button [block]="true" (click)="load()">
+              {{ 'practice.summary.again' | transloco }}
+            </app-button>
+            <a class="btn btn--secondary btn--block" routerLink="/write">
+              {{ 'practice.summary.done' | transloco }}
+            </a>
+          </div>
+        </div>
+      } @else if (current(); as exercise) {
+        <p class="practice__progress" aria-live="polite">
+          {{ 'practice.progress' | transloco: { current: index() + 1, total: total() } }}
+        </p>
+
+        <div class="card exercise">
+          <span class="chip">
+            {{ 'practice.rule' | transloco }}: {{ 'rules.' + exercise.rule_tag | transloco }}
+          </span>
+          <h2 #heading class="exercise__prompt" tabindex="-1">{{ exercise.prompt }}</h2>
+
+          @if (exercise.type === 'multiple_choice') {
+            <div
+              class="options"
+              role="group"
+              [attr.aria-label]="'practice.answerLabel' | transloco"
+            >
+              @for (option of exercise.options; track option) {
+                <button
+                  type="button"
+                  class="btn btn--secondary option"
+                  [class.option--correct]="
+                    phase() === 'feedback' && option === currentAttempt()?.correct_answer
+                  "
+                  [class.option--wrong]="
+                    phase() === 'feedback' &&
+                    option !== currentAttempt()?.correct_answer &&
+                    !currentAttempt()?.is_correct &&
+                    option === lastChosen()
+                  "
+                  [disabled]="phase() !== 'answering' || submitting()"
+                  (click)="chooseOption(option)"
+                >
+                  {{ option }}
+                </button>
+              }
+            </div>
+          } @else {
+            <form
+              class="fill-blank"
+              [formGroup]="fillBlankForm"
+              (ngSubmit)="submitFillBlank()"
+              novalidate
+            >
+              <app-form-field
+                [control]="fillBlankForm.controls.answer"
+                label="practice.answerLabel"
+                autocomplete="off"
+                [required]="true"
+              />
+              <app-button
+                type="submit"
+                [block]="true"
+                [loading]="submitting()"
+                [disabled]="phase() !== 'answering'"
+              >
+                {{ 'practice.check' | transloco }}
+              </app-button>
+            </form>
+          }
+
+          @if (errorKey(); as key) {
+            <p class="alert alert--error" role="alert">{{ key | transloco: errorParams() }}</p>
+          }
+
+          @if (currentAttempt(); as result) {
+            <div
+              class="feedback"
+              [class.feedback--correct]="result.is_correct"
+              [class.feedback--incorrect]="!result.is_correct"
+              role="status"
+            >
+              <p class="feedback__verdict">
+                {{ (result.is_correct ? 'practice.correct' : 'practice.incorrect') | transloco }}
+              </p>
+              @if (!result.is_correct) {
+                <p class="feedback__answer">
+                  {{ 'practice.correctAnswerWas' | transloco: { answer: result.correct_answer } }}
+                </p>
+              }
+              <p class="feedback__explanation">{{ result.explanation }}</p>
+              <app-button [block]="true" (click)="continue()">
+                {{ 'practice.continue' | transloco }}
+              </app-button>
+            </div>
+          }
+        </div>
+      }
+    }
+  }
+</section>

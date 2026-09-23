@@ -63,6 +63,7 @@ describe('HeaderComponent', () => {
       expect(texts(el.querySelectorAll('.header__nav a'))).toEqual([
         'Escribir',
         'Historial',
+        'Practicar',
         'Ajustes',
       ]);
       expect(el.querySelector('.header__actions a.btn')).toBeNull();

@@ -271,16 +271,16 @@ describe('WritePage', () => {
     }
 
     it.each([
-      ['daily_quota_exceeded', 429, 'Has llegado al límite diario de análisis. Vuelve mañana.'],
+      ['daily_quota_exceeded', 429, 'Has llegado al límite diario. Vuelve mañana.'],
       [
         'llm_unavailable',
         503,
-        'El servicio de análisis no está disponible ahora mismo. Inténtalo de nuevo en un rato.',
+        'El servicio de IA no está disponible ahora mismo. Inténtalo de nuevo en un rato.',
       ],
       [
         'llm_invalid_response',
         502,
-        'No hemos podido entender la respuesta del análisis. Inténtalo de nuevo.',
+        'No hemos podido entender la respuesta de la IA. Inténtalo de nuevo.',
       ],
       [
         'rate_limit_exceeded',
@@ -319,7 +319,7 @@ describe('WritePage', () => {
       await settle();
 
       expect(alert()?.textContent?.trim()).toBe(
-        "You've reached the daily analysis limit. Come back tomorrow.",
+        "You've reached today's limit for this. Come back tomorrow.",
       );
     });
 

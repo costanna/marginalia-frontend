@@ -5,9 +5,9 @@
 Web app for **Marginalia**, an AI-powered English corrector that annotates a learner's text like a
 teacher's margin notes, estimates the CEFR level and builds personalised exercises.
 
-> Status: **Phase 5 (history and settings)** done: write a text and read it annotated, browse and
-> delete your saved texts, edit your profile, download all your data and delete your account.
-> Next: practice (Phase 6) and progress (Phase 7).
+> Status: **Phase 6 (practice)** done: write a text and read it annotated, browse and delete your
+> saved texts, edit your profile, download all your data and delete your account, and practise the
+> rules you fail most with exercises built from your own mistakes. Next: progress (Phase 7).
 
 Backend: [marginalia-backend](https://github.com/costanna/marginalia-backend)
 
@@ -45,7 +45,8 @@ src/
     shared/ui/  reusable components: button, form field, empty state, confirm dialog, logo, toggles...
     shared/     also forms (validators), format (dates), download (save a JSON file)
     layout/     header (with the mobile side panel), footer, shell
-    features/   landing (with the demo), auth, write, history (list, detail), settings, not-found
+    features/   landing (with the demo), auth, write, history (list, detail), practice, settings,
+                not-found
   assets/i18n/  ca.json, es.json, en.json
   styles/       tokens, themes (light/dark), base, components
 ```
@@ -103,6 +104,19 @@ src/
   `download` link; nothing goes through a third party. The API limits it to 5 per minute.
 - **Deleting is always asked twice** (a delete button, then a dialog that names the consequence), and
   deleting the account ends the session and returns to the home page.
+- **`(ngSubmit)` needs `[formGroup]` (or `FormsModule`'s `NgForm`) to fire at all.**
+  `ReactiveFormsModule` alone exports `FormControlDirective`, `FormGroupDirective` and friends, but
+  not `NgForm`; a bare `<form (ngSubmit)="...">` with no `[formGroup]` compiles without error but the
+  handler is never called (a raw `submit` event still reaches a plain native listener, which is how
+  this was found). The practice screen's fill-in-the-blank form wraps its single `FormControl` in a
+  one-field `FormGroup` purely so `[formGroup]` has something to bind to.
+- **Practice is one exercise at a time, capped at 640px and centred**, at every screen width (not
+  just on mobile): a quiz reads better as a single column than as a grid. The correct answer and the
+  explanation are never sent to the browser before an attempt; the API only reveals them in the
+  response to that attempt.
+- **A batch of exercises survives a reload.** Generating is idempotent: while any exercise from the
+  current batch is still unanswered, the API hands the same batch back instead of building (and
+  charging for) a new one, so leaving mid-session and coming back resumes where the learner left off.
 
 ## Environment
 

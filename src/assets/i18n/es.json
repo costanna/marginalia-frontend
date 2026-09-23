@@ -109,11 +109,12 @@
       "unauthorized": "Tu sesión ha caducado. Vuelve a iniciar sesión.",
       "not_found": "No hemos encontrado lo que buscabas.",
       "rate_limit_exceeded": "Demasiados intentos seguidos. Espera un momento e inténtalo de nuevo.",
-      "daily_quota_exceeded": "Has llegado al límite diario de análisis. Vuelve mañana.",
+      "daily_quota_exceeded": "Has llegado al límite diario. Vuelve mañana.",
       "text_too_short": "El texto es demasiado corto (mínimo {{min}} caracteres).",
       "text_too_long": "El texto es demasiado largo (máximo {{max}} caracteres).",
-      "llm_unavailable": "El servicio de análisis no está disponible ahora mismo. Inténtalo de nuevo en un rato.",
-      "llm_invalid_response": "No hemos podido entender la respuesta del análisis. Inténtalo de nuevo."
+      "llm_unavailable": "El servicio de IA no está disponible ahora mismo. Inténtalo de nuevo en un rato.",
+      "llm_invalid_response": "No hemos podido entender la respuesta de la IA. Inténtalo de nuevo.",
+      "exercise_already_attempted": "Este ejercicio ya se había respondido."
     }
   },
   "server": {
@@ -201,6 +202,32 @@
         "text": "Puede que se haya eliminado.",
         "cta": "Volver al historial"
       }
+    }
+  },
+  "practice": {
+    "title": "Practicar",
+    "subtitle": "Ejercicios creados a partir de los errores que más repites.",
+    "loading": "Preparando tus ejercicios…",
+    "loadFailed": "No hemos podido cargar tus ejercicios.",
+    "retry": "Volver a intentarlo",
+    "empty": {
+      "title": "Todavía no tienes ejercicios",
+      "text": "Escribe y corrige un texto primero: los ejercicios se crean a partir de tus propios errores.",
+      "cta": "Escribir mi primer texto"
+    },
+    "progress": "Ejercicio {{current}} de {{total}}",
+    "answerLabel": "Tu respuesta",
+    "check": "Comprobar",
+    "correct": "¡Correcto!",
+    "incorrect": "No es correcto.",
+    "correctAnswerWas": "La respuesta correcta es: {{answer}}",
+    "continue": "Continuar",
+    "rule": "Regla",
+    "summary": {
+      "title": "Resumen de la sesión",
+      "score": "Has acertado {{correct}} de {{total}}.",
+      "again": "Practicar más",
+      "done": "Volver a escribir"
     }
   },
   "settings": {

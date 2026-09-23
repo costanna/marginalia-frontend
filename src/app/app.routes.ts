@@ -44,6 +44,12 @@ export const routes: Routes = [
       import('./features/history/history-detail.page').then((m) => m.HistoryDetailPage),
   },
   {
+    path: 'practice',
+    canActivate: [authGuard],
+    title: 'nav.practice',
+    loadComponent: () => import('./features/practice/practice.page').then((m) => m.PracticePage),
+  },
+  {
     path: 'settings',
     canActivate: [authGuard],
     title: 'nav.settings',
