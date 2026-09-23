@@ -1,0 +1,137 @@
+@use 'styles/mixins' as m;
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  padding-block: var(--sp-24) var(--sp-48);
+
+  @include m.up(lg) {
+    padding-block: var(--sp-32) var(--sp-64);
+  }
+}
+
+.progress__subtitle {
+  margin: calc(var(--sp-4) * -1) 0 0;
+  color: var(--text-muted);
+}
+
+.progress__state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-12);
+  max-width: 40rem;
+
+  p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .alert {
+    color: var(--danger);
+  }
+}
+
+// Mobile: 2x2 (a 5th KPI wraps onto its own row). Desktop: one row (spec section 8).
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-12);
+  margin: 0;
+
+  @include m.up(lg) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--sp-16);
+  }
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-16);
+
+  dt {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  dd {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+}
+
+// Mobile: charts stacked. Desktop: 2 columns, the bar chart (rule names) spans both.
+.charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-16);
+
+  @include m.up(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-24);
+  }
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  min-width: 0;
+
+  h2 {
+    font-size: 1.125rem;
+  }
+}
+
+.chart--wide {
+  @include m.up(lg) {
+    grid-column: 1 / -1;
+  }
+}
+
+// A fixed height per breakpoint (never intrinsic): Chart.js needs maintainAspectRatio: false to
+// fill it rather than guessing its own square-ish size from the canvas's default 300x150.
+.chart__canvas {
+  position: relative;
+  height: 220px;
+
+  @include m.up(md) {
+    height: 280px;
+  }
+
+  @include m.up(lg) {
+    height: 320px;
+  }
+}
+
+.chart__canvas--donut {
+  height: 260px;
+
+  @include m.up(md) {
+    height: 300px;
+  }
+}
+
+.chart__canvas--bar {
+  height: 260px;
+
+  @include m.up(lg) {
+    height: 300px;
+  }
+}
+
+.chart__empty {
+  margin: 0;
+  padding: var(--sp-24) 0;
+  color: var(--text-muted);
+  text-align: center;
+}

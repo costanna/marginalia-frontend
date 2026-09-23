@@ -230,6 +230,36 @@
       "done": "Back to writing"
     }
   },
+  "progress": {
+    "title": "Your progress",
+    "subtitle": "How your English is coming along over time.",
+    "loading": "Loading your progress…",
+    "loadFailed": "We couldn't load your progress.",
+    "retry": "Try again",
+    "empty": {
+      "title": "Not enough data yet",
+      "text": "Write and check a few texts to start seeing your progress here.",
+      "cta": "Write my first text"
+    },
+    "kpis": {
+      "texts": "Texts",
+      "words": "Words",
+      "errorsPer100": "Errors per 100 words",
+      "level": "Current level",
+      "streak": "Streak",
+      "streakValue": "{{count}} days"
+    },
+    "charts": {
+      "line": "Errors per 100 words over time",
+      "lineAlt": "Line chart of errors per 100 words by day",
+      "donut": "Errors by category",
+      "donutAlt": "Pie chart showing the distribution of errors by category",
+      "donutEmpty": "No errors recorded yet.",
+      "bar": "Most frequent rules",
+      "barAlt": "Bar chart of the most frequent correction rules",
+      "barEmpty": "Not enough data yet."
+    }
+  },
   "settings": {
     "title": "Settings",
     "menu": "Settings sections",

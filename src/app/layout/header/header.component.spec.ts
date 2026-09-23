@@ -64,6 +64,7 @@ describe('HeaderComponent', () => {
         'Escribir',
         'Historial',
         'Practicar',
+        'Progreso',
         'Ajustes',
       ]);
       expect(el.querySelector('.header__actions a.btn')).toBeNull();

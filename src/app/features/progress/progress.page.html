@@ -1,0 +1,104 @@
+<section class="progress container">
+  <h1>{{ 'progress.title' | transloco }}</h1>
+  <p class="progress__subtitle">{{ 'progress.subtitle' | transloco }}</p>
+
+  @switch (status()) {
+    @case ('loading') {
+      <div class="progress__state" role="status">
+        <p>{{ 'progress.loading' | transloco }}</p>
+        <app-skeleton [lines]="5" />
+      </div>
+    }
+    @case ('error') {
+      <div class="progress__state">
+        <p class="alert alert--error" role="alert">{{ 'progress.loadFailed' | transloco }}</p>
+        <app-button variant="secondary" (click)="load()">
+          {{ 'progress.retry' | transloco }}
+        </app-button>
+      </div>
+    }
+    @case ('empty') {
+      <app-empty-state title="progress.empty.title" text="progress.empty.text">
+        <a class="btn btn--primary" routerLink="/write">{{ 'progress.empty.cta' | transloco }}</a>
+      </app-empty-state>
+    }
+    @case ('active') {
+      @if (kpis(); as stats) {
+        <dl class="kpis">
+          <div class="card kpi">
+            <dt>{{ 'progress.kpis.texts' | transloco }}</dt>
+            <dd>{{ stats.texts_count }}</dd>
+          </div>
+          <div class="card kpi">
+            <dt>{{ 'progress.kpis.words' | transloco }}</dt>
+            <dd>{{ stats.words_count }}</dd>
+          </div>
+          <div class="card kpi">
+            <dt>{{ 'progress.kpis.errorsPer100' | transloco }}</dt>
+            <dd>{{ stats.errors_per_100_words }}</dd>
+          </div>
+          <div class="card kpi">
+            <dt>{{ 'progress.kpis.level' | transloco }}</dt>
+            <dd>{{ stats.current_level || '—' }}</dd>
+          </div>
+          <div class="card kpi">
+            <dt>{{ 'progress.kpis.streak' | transloco }}</dt>
+            <dd>{{ 'progress.kpis.streakValue' | transloco: { count: stats.streak_days } }}</dd>
+          </div>
+        </dl>
+      }
+
+      <div class="charts">
+        <section class="card chart" aria-labelledby="chart-line-title">
+          <h2 id="chart-line-title">{{ 'progress.charts.line' | transloco }}</h2>
+          <div class="chart__canvas chart__canvas--line">
+            <canvas
+              baseChart
+              type="line"
+              [data]="lineChartData()"
+              [options]="lineChartOptions()"
+              role="img"
+              [attr.aria-label]="'progress.charts.lineAlt' | transloco"
+            ></canvas>
+          </div>
+        </section>
+
+        <section class="card chart" aria-labelledby="chart-donut-title">
+          <h2 id="chart-donut-title">{{ 'progress.charts.donut' | transloco }}</h2>
+          @if (noErrorsYet()) {
+            <p class="chart__empty">{{ 'progress.charts.donutEmpty' | transloco }}</p>
+          } @else {
+            <div class="chart__canvas chart__canvas--donut">
+              <canvas
+                baseChart
+                type="doughnut"
+                [data]="donutChartData()"
+                [options]="donutChartOptions()"
+                role="img"
+                [attr.aria-label]="'progress.charts.donutAlt' | transloco"
+              ></canvas>
+            </div>
+          }
+        </section>
+
+        <section class="card chart chart--wide" aria-labelledby="chart-bar-title">
+          <h2 id="chart-bar-title">{{ 'progress.charts.bar' | transloco }}</h2>
+          @if (barChartData().labels?.length) {
+            <div class="chart__canvas chart__canvas--bar">
+              <canvas
+                baseChart
+                type="bar"
+                [data]="barChartData()"
+                [options]="barChartOptions()"
+                role="img"
+                [attr.aria-label]="'progress.charts.barAlt' | transloco"
+              ></canvas>
+            </div>
+          } @else {
+            <p class="chart__empty">{{ 'progress.charts.barEmpty' | transloco }}</p>
+          }
+        </section>
+      </div>
+    }
+  }
+</section>

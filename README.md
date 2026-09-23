@@ -5,17 +5,18 @@
 Web app for **Marginalia**, an AI-powered English corrector that annotates a learner's text like a
 teacher's margin notes, estimates the CEFR level and builds personalised exercises.
 
-> Status: **Phase 6 (practice)** done: write a text and read it annotated, browse and delete your
-> saved texts, edit your profile, download all your data and delete your account, and practise the
-> rules you fail most with exercises built from your own mistakes. Next: progress (Phase 7).
+> Status: **Phase 7 (progress)** done: write a text and read it annotated, browse and delete your
+> saved texts, edit your profile, download all your data and delete your account, practise the rules
+> you fail most with exercises built from your own mistakes, and see KPIs, a streak and three charts
+> built from your own history. Next: deployment polish (Phase 8).
 
 Backend: [marginalia-backend](https://github.com/costanna/marginalia-backend)
 
 ## Stack
 
 Angular 22 (standalone components, signals, zoneless, `OnPush`) · strict TypeScript · SCSS with CSS
-variables · Transloco (ca / es / en) · self-hosted Inter and Fraunces · Vitest · ESLint
-(angular-eslint, with template accessibility rules) · Prettier · deployed on Vercel
+variables · Transloco (ca / es / en) · self-hosted Inter and Fraunces · Chart.js (via ng2-charts) ·
+Vitest · ESLint (angular-eslint, with template accessibility rules) · Prettier · deployed on Vercel
 
 ## Run locally
 
@@ -45,10 +46,11 @@ src/
     shared/ui/  reusable components: button, form field, empty state, confirm dialog, logo, toggles...
     shared/     also forms (validators), format (dates), download (save a JSON file)
     layout/     header (with the mobile side panel), footer, shell
-    features/   landing (with the demo), auth, write, history (list, detail), practice, settings,
-                not-found
+    features/   landing (with the demo), auth, write, history (list, detail), practice, progress,
+                settings, not-found
   assets/i18n/  ca.json, es.json, en.json
   styles/       tokens, themes (light/dark), base, components
+  testing/      fixtures, i18n test provider, a canvas/ResizeObserver stub for chart specs
 ```
 
 ## Requirements covered on every screen
@@ -117,6 +119,26 @@ src/
 - **A batch of exercises survives a reload.** Generating is idempotent: while any exercise from the
   current batch is still unanswered, the API hands the same batch back instead of building (and
   charging for) a new one, so leaving mid-session and coming back resumes where the learner left off.
+- **Charts read their colours from the page's CSS custom properties at draw time**
+  (`cssColor(document, name)`, via `getComputedStyle`), never a fixed palette: a `computed` that
+  depends on `ThemeService.resolved()` re-reads them and rebuilds each chart's `data`/`options`
+  whenever the theme changes, so light/dark and the category colours always match the rest of the UI.
+- **Chart.js is registered on `ProgressPage`'s own `@Component` providers, not on the route.** A
+  route's `providers` in `app.routes.ts` are evaluated as soon as that (eagerly-imported) file loads,
+  which would pull `ng2-charts` and `chart.js` into the main bundle; providers on a lazy-loaded
+  standalone component are only evaluated once its own chunk is fetched. Moving `provideCharts(...)`
+  from the route to the component dropped the main bundle by ~180KB (verified with `ng build`) with no
+  behaviour change. Only the specific `ChartComponentLike`s the three charts need are registered
+  (`chart-setup.ts`), not Chart.js's full `registerables` — including `Filler`, needed for the line
+  chart's area fill even though the line itself draws without it (Chart.js only warns, never throws,
+  if a used plugin isn't registered — worth registering deliberately rather than reading the console).
+- **A `fullPage` screenshot can catch a chart mid-redraw.** Verifying this screen with Playwright,
+  a `page.screenshot({ fullPage: true })` taken right after the page settled showed the three chart
+  panels completely blank, with no console error; a tall fixed-viewport screenshot of the same page
+  state showed them fully rendered. `fullPage` resizes the viewport to the document's height just
+  before capturing, which fires Chart.js's `ResizeObserver`-driven redraw; that redraw isn't always
+  synchronous with the capture. Not an app bug — just something to know when scripting verification
+  against real Chart.js output: prefer a tall viewport over `fullPage` for pages with charts.
 
 ## Environment
 
