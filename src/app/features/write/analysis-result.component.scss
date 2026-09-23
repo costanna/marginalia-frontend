@@ -34,7 +34,6 @@
   font-weight: 600;
 }
 
-// --- Tabs (below the desktop breakpoint) ---
 .tabs {
   display: flex;
   gap: var(--sp-4);
@@ -104,7 +103,6 @@
   list-style: none;
 }
 
-// --- The annotated text ---
 .annotated {
   font-family: var(--font-serif);
   font-size: var(--text-writing);

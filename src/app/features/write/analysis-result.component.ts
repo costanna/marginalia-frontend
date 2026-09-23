@@ -154,8 +154,6 @@ export class AnalysisResultComponent {
     }
   }
 
-  // --- mobile tabs -----------------------------------------------------------------------------
-
   protected selectTab(tab: Tab): void {
     this.tab.set(tab);
   }
@@ -175,8 +173,6 @@ export class AnalysisResultComponent {
   protected paneHidden(tab: Tab): boolean {
     return !this.isDesktop() && this.tab() !== tab;
   }
-
-  // --- bottom sheet ----------------------------------------------------------------------------
 
   protected openSheet(): void {
     const dialog = this.sheet()?.nativeElement;
