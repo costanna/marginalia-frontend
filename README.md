@@ -140,19 +140,30 @@ src/
   before capturing, which fires Chart.js's `ResizeObserver`-driven redraw; that redraw isn't always
   synchronous with the capture. Not an app bug — just something to know when scripting verification
   against real Chart.js output: prefer a tall viewport over `fullPage` for pages with charts.
-- **The Content-Security-Policy needs neither a script hash nor `'unsafe-inline'` for styles.** Two
-  changes made that possible: the theme-setting script that used to be inlined in `index.html` (to
-  run before first paint, avoiding a flash of the wrong theme) now lives in `public/theme-init.js`
-  instead — a plain `<script src="theme-init.js">` covered by `script-src 'self'`, with no per-build
-  hash to keep in sync whenever the script is edited. And `optimization.styles.inlineCritical` is
-  turned off in `angular.json`: left on (the Angular CLI default), it inlines a `<style>` block in
-  `index.html` and adds an `onload` attribute to swap the stylesheet from `media="print"` to `all` —
-  both would need `'unsafe-inline'` in `style-src`. With it off, the stylesheet is a normal blocking
-  `<link>`, Angular's own runtime style injection turned out not to need `'unsafe-inline'` either
-  (verified by loading the real production build under a locked-down `style-src 'self'` policy: every
-  page rendered with its fonts and colours correctly, zero CSP violations from the app's own code —
-  the only violations seen came from a browser extension unrelated to the app rewriting the policy),
-  and the trade-off is a marginally later first paint of non-critical CSS, not a concern at this scale.
+- **The Content-Security-Policy needs no script hash, but does need `'unsafe-inline'` for styles.**
+  The theme-setting script that used to be inlined in `index.html` (to run before first paint,
+  avoiding a flash of the wrong theme) now lives in `public/theme-init.js` instead — a plain
+  `<script src="theme-init.js">` covered by `script-src 'self'`, with no per-build hash to keep in
+  sync whenever the script is edited. `script-src` stays strict with no exceptions.
+  `style-src`, though, needs `'unsafe-inline'`: Angular's Emulated view encapsulation applies a
+  component's `styles` by inserting a `<style>` element per component _type_ into `<head>` the first
+  time it renders — and a dynamically-created `<style>` element is "inline" to CSP regardless of its
+  content, so every such insertion needs `'unsafe-inline'` (or a nonce, which needs a per-request
+  server to mint) unless the exact CSS text matches a hash source, which is as unmanageable per
+  component as it was for one script. An earlier version of this policy shipped without
+  `'unsafe-inline'` in `style-src` on the (wrong) belief that Angular's runtime style injection did
+  not need it: manual testing of several pages found no console violations, but the one component it
+  never happened to catch — the header's theme toggle, silently missing its whole `.toggle` rule and
+  shrunk to its unstyled ~16×32px browser default — was exactly what Lighthouse's `target-size`
+  accessibility audit on the live site caught. Confirmed the fix by measuring that button's real
+  bounding box (44×44px again once `'unsafe-inline'` is present) and finding zero CSP violations from
+  the app's own code (`chunk-*.js`) with it, versus several `Applying inline style violates ...
+style-src` errors sourced from the app's own bundle without it. `optimization.styles.inlineCritical`
+  in `angular.json` stays off regardless — a normal blocking `<link>` for the stylesheet, not tied to
+  this decision — and Lighthouse (audited from a clean environment, since this machine's antivirus
+  intercepts and injects its own render-blocking resources into every page load, local and remote
+  alike, which is a trap worth knowing about before trusting any Lighthouse run on a contaminated
+  machine) already scores Performance 100 desktop / 94 mobile, so there was nothing to chase there.
 
 ## Environment
 
