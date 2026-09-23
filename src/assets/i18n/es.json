@@ -230,6 +230,36 @@
       "done": "Volver a escribir"
     }
   },
+  "progress": {
+    "title": "Tu progreso",
+    "subtitle": "Cómo evoluciona tu inglés con el tiempo.",
+    "loading": "Cargando tu progreso…",
+    "loadFailed": "No hemos podido cargar tu progreso.",
+    "retry": "Volver a intentarlo",
+    "empty": {
+      "title": "Todavía no hay datos suficientes",
+      "text": "Escribe y corrige algunos textos para empezar a ver tu progreso aquí.",
+      "cta": "Escribir mi primer texto"
+    },
+    "kpis": {
+      "texts": "Textos",
+      "words": "Palabras",
+      "errorsPer100": "Errores cada 100 palabras",
+      "level": "Nivel actual",
+      "streak": "Racha",
+      "streakValue": "{{count}} días"
+    },
+    "charts": {
+      "line": "Errores cada 100 palabras a lo largo del tiempo",
+      "lineAlt": "Gráfico de líneas con los errores cada 100 palabras por día",
+      "donut": "Errores por categoría",
+      "donutAlt": "Gráfico circular con la distribución de errores por categoría",
+      "donutEmpty": "Todavía no hay errores registrados.",
+      "bar": "Reglas que más se repiten",
+      "barAlt": "Gráfico de barras con las reglas de corrección más frecuentes",
+      "barEmpty": "Todavía no hay suficientes datos."
+    }
+  },
   "settings": {
     "title": "Ajustes",
     "menu": "Secciones de ajustes",

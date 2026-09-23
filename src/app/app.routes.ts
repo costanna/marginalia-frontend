@@ -50,6 +50,14 @@ export const routes: Routes = [
     loadComponent: () => import('./features/practice/practice.page').then((m) => m.PracticePage),
   },
   {
+    path: 'progress',
+    canActivate: [authGuard],
+    title: 'nav.progress',
+    // Chart.js registration lives on ProgressPage's own @Component providers (not here), so
+    // ng2-charts and chart.js are pulled in only by that lazy chunk, never the main bundle.
+    loadComponent: () => import('./features/progress/progress.page').then((m) => m.ProgressPage),
+  },
+  {
     path: 'settings',
     canActivate: [authGuard],
     title: 'nav.settings',

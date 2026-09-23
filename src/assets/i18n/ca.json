@@ -230,6 +230,36 @@
       "done": "Torna a escriure"
     }
   },
+  "progress": {
+    "title": "El teu progrés",
+    "subtitle": "Com evoluciona el teu anglès amb el temps.",
+    "loading": "Carregant el teu progrés…",
+    "loadFailed": "No hem pogut carregar el teu progrés.",
+    "retry": "Torna-ho a provar",
+    "empty": {
+      "title": "Encara no hi ha prou dades",
+      "text": "Escriu i corregeix alguns textos per començar a veure el teu progrés aquí.",
+      "cta": "Escriu el meu primer text"
+    },
+    "kpis": {
+      "texts": "Textos",
+      "words": "Paraules",
+      "errorsPer100": "Errors cada 100 paraules",
+      "level": "Nivell actual",
+      "streak": "Ratxa",
+      "streakValue": "{{count}} dies"
+    },
+    "charts": {
+      "line": "Errors cada 100 paraules al llarg del temps",
+      "lineAlt": "Gràfic de línies amb els errors cada 100 paraules per dia",
+      "donut": "Errors per categoria",
+      "donutAlt": "Gràfic circular amb la distribució d'errors per categoria",
+      "donutEmpty": "Encara no hi ha errors registrats.",
+      "bar": "Regles que més es repeteixen",
+      "barAlt": "Gràfic de barres amb les regles de correcció més freqüents",
+      "barEmpty": "Encara no hi ha prou dades."
+    }
+  },
   "settings": {
     "title": "Ajustos",
     "menu": "Seccions dels ajustos",
