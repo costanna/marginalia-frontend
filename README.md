@@ -5,10 +5,11 @@
 Web app for **Marginalia**, an AI-powered English corrector that annotates a learner's text like a
 teacher's margin notes, estimates the CEFR level and builds personalised exercises.
 
-> Status: **Phase 7 (progress)** done: write a text and read it annotated, browse and delete your
-> saved texts, edit your profile, download all your data and delete your account, practise the rules
-> you fail most with exercises built from your own mistakes, and see KPIs, a streak and three charts
-> built from your own history. Next: deployment polish (Phase 8).
+> Status: **Phase 8 (deployment polish)** done: write a text and read it annotated, browse and delete
+> your saved texts, edit your profile, download all your data and delete your account, practise the
+> rules you fail most with exercises built from your own mistakes, see KPIs, a streak and three
+> charts built from your own history, and a strict Content-Security-Policy on the deployed site. Next:
+> portfolio polish (Phase 9).
 
 Backend: [marginalia-backend](https://github.com/costanna/marginalia-backend)
 
@@ -139,12 +140,56 @@ src/
   before capturing, which fires Chart.js's `ResizeObserver`-driven redraw; that redraw isn't always
   synchronous with the capture. Not an app bug — just something to know when scripting verification
   against real Chart.js output: prefer a tall viewport over `fullPage` for pages with charts.
+- **The Content-Security-Policy needs neither a script hash nor `'unsafe-inline'` for styles.** Two
+  changes made that possible: the theme-setting script that used to be inlined in `index.html` (to
+  run before first paint, avoiding a flash of the wrong theme) now lives in `public/theme-init.js`
+  instead — a plain `<script src="theme-init.js">` covered by `script-src 'self'`, with no per-build
+  hash to keep in sync whenever the script is edited. And `optimization.styles.inlineCritical` is
+  turned off in `angular.json`: left on (the Angular CLI default), it inlines a `<style>` block in
+  `index.html` and adds an `onload` attribute to swap the stylesheet from `media="print"` to `all` —
+  both would need `'unsafe-inline'` in `style-src`. With it off, the stylesheet is a normal blocking
+  `<link>`, Angular's own runtime style injection turned out not to need `'unsafe-inline'` either
+  (verified by loading the real production build under a locked-down `style-src 'self'` policy: every
+  page rendered with its fonts and colours correctly, zero CSP violations from the app's own code —
+  the only violations seen came from a browser extension unrelated to the app rewriting the policy),
+  and the trade-off is a marginally later first paint of non-critical CSS, not a concern at this scale.
 
 ## Environment
 
 Angular does not read environment variables at run time: the API URL is compiled into the bundle
 from `src/environments/environment.ts` (local) and `environment.production.ts` (set the Render URL
 there before deploying).
+
+## Deployment (Vercel, free)
+
+Already deployed at [marginalia-english.vercel.app](https://marginalia-english.vercel.app) (the name
+`marginalia` was taken, hence `-english`). To redeploy or set it up again:
+
+1. *New Project*, import this repository. Vercel detects Angular automatically (build command
+   `ng build`, output `dist/marginalia/browser`); no extra configuration needed beyond `vercel.json`,
+   already in the repo.
+2. **Deployment Protection / Vercel Authentication must stay OFF.** With it on, every visitor is sent
+   to a Vercel login page instead of the app — easy to miss since it works fine when *you* are signed
+   into Vercel.
+3. Before deploying, `src/environments/environment.production.ts` must point at the real backend URL
+   (see [marginalia-backend](https://github.com/costanna/marginalia-backend)'s own deployment steps);
+   Angular compiles it into the bundle, so a stale URL there means redeploying, not an env var change.
+
+**Verify** after any deploy that touches `vercel.json`, `index.html` or `angular.json`'s
+`optimization` settings — a CSP mistake fails silently (nothing crashes, things just quietly stop
+rendering or running):
+
+1. Open the deployed site in a real browser with the console open. `data-theme` must already be set
+   on `<html>` on first load (no flash of the wrong theme), and the page must be fully styled — both
+   depend on `theme-init.js` and the stylesheet loading, which the CSP could block.
+2. No `Content Security Policy` / `Refused to` messages in the console anywhere in the app (sign up,
+   write and analyse a text, history, practice, progress, settings). A real browser extension (e.g.
+   antivirus web-protection) can add noise here by rewriting the page's policy — check the reported
+   violation's source before assuming it is the app's.
+3. `curl -s -D - -o /dev/null https://marginalia-english.vercel.app/ | grep -i content-security` shows
+   the policy actually being sent (not just present in `vercel.json`).
+4. Any change to `public/theme-init.js`'s content does not need a matching change anywhere else — that
+   is the point of it being a `script-src 'self'`-covered file instead of an inline, hashed one.
 
 ## Author
 
