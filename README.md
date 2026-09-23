@@ -165,11 +165,11 @@ there before deploying).
 Already deployed at [marginalia-english.vercel.app](https://marginalia-english.vercel.app) (the name
 `marginalia` was taken, hence `-english`). To redeploy or set it up again:
 
-1. *New Project*, import this repository. Vercel detects Angular automatically (build command
+1. _New Project_, import this repository. Vercel detects Angular automatically (build command
    `ng build`, output `dist/marginalia/browser`); no extra configuration needed beyond `vercel.json`,
    already in the repo.
 2. **Deployment Protection / Vercel Authentication must stay OFF.** With it on, every visitor is sent
-   to a Vercel login page instead of the app — easy to miss since it works fine when *you* are signed
+   to a Vercel login page instead of the app — easy to miss since it works fine when _you_ are signed
    into Vercel.
 3. Before deploying, `src/environments/environment.production.ts` must point at the real backend URL
    (see [marginalia-backend](https://github.com/costanna/marginalia-backend)'s own deployment steps);
