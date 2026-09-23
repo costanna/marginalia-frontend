@@ -1,7 +1,7 @@
-export const SUPPORTED_LANGS = ['ca', 'es', 'en'] as const;
+export const SUPPORTED_LANGS = ['ca', 'es', 'en', 'fr'] as const;
 export type SupportedLang = (typeof SUPPORTED_LANGS)[number];
 
-/** Used when nothing is stored and the browser language is not one of the three. */
+/** Used when nothing is stored and the browser language is not one of these. */
 export const DEFAULT_LANG: SupportedLang = 'es';
 
 export const LANG_STORAGE_KEY = 'marginalia.lang';

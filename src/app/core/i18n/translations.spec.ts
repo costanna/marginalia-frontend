@@ -3,6 +3,7 @@ import { API_ERROR_CODES } from '../api/error-codes';
 import ca from '../../../assets/i18n/ca.json';
 import en from '../../../assets/i18n/en.json';
 import es from '../../../assets/i18n/es.json';
+import fr from '../../../assets/i18n/fr.json';
 
 interface Tree {
   [key: string]: string | Tree;
@@ -22,6 +23,7 @@ const files: Record<string, Record<string, string>> = {
   ca: flatten(ca),
   es: flatten(es),
   en: flatten(en),
+  fr: flatten(fr),
 };
 const placeholders = (text: string) =>
   [...text.matchAll(/{{\s*(\w+)\s*}}/g)].map((m) => m[1]).sort();
@@ -40,7 +42,7 @@ describe('translation files', () => {
 
   it('use the same interpolation parameters in every language', () => {
     for (const [key, text] of Object.entries(files['es'])) {
-      for (const lang of ['ca', 'en']) {
+      for (const lang of ['ca', 'en', 'fr']) {
         expect({ key, lang, params: placeholders(files[lang][key]) }).toEqual({
           key,
           lang,
@@ -89,5 +91,9 @@ describe('translation files', () => {
     expect(files['es']['home.tagline']).toBe('Aprende inglés escribiendo.');
     expect(files['ca']['home.tagline']).toBe('Aprèn anglès escrivint.');
     expect(files['en']['home.tagline']).toBe('Learn English by writing.');
+    expect(files['fr']['nav.write']).toBe('Écrire');
+    expect(files['fr']['theme.dark']).toBe('Sombre');
+    expect(files['fr']['footer.rights']).toBe('Tous droits réservés.');
+    expect(files['fr']['home.tagline']).toBe("Apprends l'anglais en écrivant.");
   });
 });

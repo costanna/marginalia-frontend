@@ -5,18 +5,18 @@
 Web app for **Marginalia**, an AI-powered English corrector that annotates a learner's text like a
 teacher's margin notes, estimates the CEFR level and builds personalised exercises.
 
-> Status: **Phase 8 (deployment polish)** done: write a text and read it annotated, browse and delete
-> your saved texts, edit your profile, download all your data and delete your account, practise the
-> rules you fail most with exercises built from your own mistakes, see KPIs, a streak and three
-> charts built from your own history, and a strict Content-Security-Policy on the deployed site. Next:
-> portfolio polish (Phase 9).
+> Status: **Phase 9 (portfolio polish)**. All planned phases (0-9) are done: write a text and read it
+> annotated, browse and delete your saved texts, edit your profile, download all your data and
+> delete your account, practise the rules you fail most with exercises built from your own mistakes,
+> see KPIs, a streak and three charts built from your own history, a strict Content-Security-Policy
+> on the deployed site, and the interface in Catalan, Spanish, English or French.
 
 Backend: [marginalia-backend](https://github.com/costanna/marginalia-backend)
 
 ## Stack
 
 Angular 22 (standalone components, signals, zoneless, `OnPush`) · strict TypeScript · SCSS with CSS
-variables · Transloco (ca / es / en) · self-hosted Inter and Fraunces · Chart.js (via ng2-charts) ·
+variables · Transloco (ca / es / en / fr) · self-hosted Inter and Fraunces · Chart.js (via ng2-charts) ·
 Vitest · ESLint (angular-eslint, with template accessibility rules) · Prettier · deployed on Vercel
 
 ## Run locally
@@ -49,7 +49,7 @@ src/
     layout/     header (with the mobile side panel), footer, shell
     features/   landing (with the demo), auth, write, history (list, detail), practice, progress,
                 settings, not-found
-  assets/i18n/  ca.json, es.json, en.json
+  assets/i18n/  ca.json, es.json, en.json, fr.json
   styles/       tokens, themes (light/dark), base, components
   testing/      fixtures, i18n test provider, a canvas/ResizeObserver stub for chart specs
 ```
@@ -58,9 +58,9 @@ src/
 
 - **Dark mode** (light / dark / system): an inline script sets `data-theme` before the first paint, so
   there is no flash; the choice persists in `localStorage` and, when signed in, in the profile.
-- **Three languages**, switched instantly without reloading; no visible text lives in templates or
-  TypeScript, only in the JSON files. A test checks the three files have identical keys and
-  parameters, and that every API error code is translated.
+- **Four languages** (Catalan, Spanish, English, French), switched instantly without reloading; no
+  visible text lives in templates or TypeScript, only in the JSON files. A test checks all four
+  files have identical keys and parameters, and that every API error code is translated.
 - **Responsive** from 320px to 1920px and beyond, mobile first, no horizontal scroll, 44px touch
   targets and 16px inputs. The page container is fluid (side padding grows from 16px to 64px), so the
   navbar, footer and pages use the whole screen; only what reads badly stretched keeps a width (the
@@ -164,6 +164,15 @@ style-src` errors sourced from the app's own bundle without it. `optimization.st
   intercepts and injects its own render-blocking resources into every page load, local and remote
   alike, which is a trap worth knowing about before trusting any Lighthouse run on a contaminated
   machine) already scores Performance 100 desktop / 94 mobile, so there was nothing to chase there.
+- **Adding French only meant a fourth JSON file and a fourth array entry** (`SUPPORTED_LANGS`) —
+  everywhere else in the app already reads the language list from `SUPPORTED_LANGS` rather than
+  naming "the three languages", so nothing else needed to change. The one real gap it exposed:
+  `src/testing/i18n-testing.ts` served the REAL translation files to every spec, but its own
+  `TRANSLATIONS` map had `ca`/`es`/`en` typed out by hand rather than built from `SUPPORTED_LANGS`,
+  so it silently kept working for the three original languages and would have quietly served
+  `undefined` for French in every test — an easy thing to miss without a test that actually renders
+  in French (added to `header.component.spec.ts`, and confirmed non-vacuous the same way as
+  everything else: reverting the fix in `i18n-testing.ts` breaks exactly that one test).
 
 ## Environment
 

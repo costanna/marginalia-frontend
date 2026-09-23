@@ -33,7 +33,8 @@
     "label": "Idioma",
     "ca": "Català",
     "es": "Castellano",
-    "en": "English"
+    "en": "English",
+    "fr": "Français"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
