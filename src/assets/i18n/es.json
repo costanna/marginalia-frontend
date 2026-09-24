@@ -33,7 +33,8 @@
     "label": "Idioma",
     "ca": "Català",
     "es": "Castellano",
-    "en": "English"
+    "en": "English",
+    "fr": "Français"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
@@ -114,6 +115,7 @@
       "text_too_long": "El texto es demasiado largo (máximo {{max}} caracteres).",
       "llm_unavailable": "El servicio de IA no está disponible ahora mismo. Inténtalo de nuevo en un rato.",
       "llm_invalid_response": "No hemos podido entender la respuesta de la IA. Inténtalo de nuevo.",
+      "llm_capacity_reached": "El servicio de IA ha alcanzado su capacidad diaria compartida. Vuelve a intentarlo mañana.",
       "exercise_already_attempted": "Este ejercicio ya se había respondido."
     }
   },

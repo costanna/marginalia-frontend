@@ -33,7 +33,8 @@
     "label": "Idioma",
     "ca": "Català",
     "es": "Castellano",
-    "en": "English"
+    "en": "English",
+    "fr": "Français"
   },
   "footer": {
     "rights": "Tots els drets reservats.",
@@ -114,6 +115,7 @@
       "text_too_long": "El text és massa llarg (màxim {{max}} caràcters).",
       "llm_unavailable": "El servei d'IA no està disponible ara mateix. Torna-ho a provar d'aquí a una estona.",
       "llm_invalid_response": "No hem pogut entendre la resposta de la IA. Torna-ho a provar.",
+      "llm_capacity_reached": "El servei d'IA ha arribat a la seva capacitat diària compartida. Torna-ho a provar demà.",
       "exercise_already_attempted": "Aquest exercici ja s'havia respost."
     }
   },

@@ -7,7 +7,7 @@ import { AuthService, TOKEN_STORAGE_KEY } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { HeaderComponent } from './header.component';
 
-async function render(signedIn = false) {
+async function render(signedIn = false, lang = 'es') {
   localStorage.clear();
   if (signedIn) {
     localStorage.setItem(TOKEN_STORAGE_KEY, 'tok');
@@ -25,7 +25,7 @@ async function render(signedIn = false) {
       provideHttpClientTesting(),
     ],
   });
-  await TestBed.inject(LanguageService).setLanguage('es');
+  await TestBed.inject(LanguageService).setLanguage(lang);
   const fixture = TestBed.createComponent(HeaderComponent);
   await fixture.whenStable();
   const el = fixture.nativeElement as HTMLElement;
@@ -70,6 +70,21 @@ describe('HeaderComponent', () => {
       expect(el.querySelector('.header__actions a.btn')).toBeNull();
       expect(el.querySelector('.header__actions button.btn')?.textContent?.trim()).toBe(
         'Cerrar sesión',
+      );
+    });
+
+    it('renders in French too, proving the fourth language is actually wired, not just present in the JSON', async () => {
+      const { el } = await render(true, 'fr');
+
+      expect(texts(el.querySelectorAll('.header__nav a'))).toEqual([
+        'Écrire',
+        'Historique',
+        'Pratiquer',
+        'Progrès',
+        'Paramètres',
+      ]);
+      expect(el.querySelector('.header__actions button.btn')?.textContent?.trim()).toBe(
+        'Déconnexion',
       );
     });
 

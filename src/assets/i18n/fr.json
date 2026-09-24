@@ -1,0 +1,332 @@
+{
+  "app": {
+    "name": "Marginalia"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "close": "Fermer",
+    "cancel": "Annuler"
+  },
+  "nav": {
+    "write": "Écrire",
+    "history": "Historique",
+    "practice": "Pratiquer",
+    "progress": "Progrès",
+    "settings": "Paramètres",
+    "login": "Connexion",
+    "register": "Créer un compte",
+    "logout": "Déconnexion",
+    "menu": "Menu",
+    "closeMenu": "Fermer le menu",
+    "main": "Navigation principale",
+    "skip": "Aller au contenu"
+  },
+  "theme": {
+    "label": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système",
+    "switchToDark": "Passer au thème sombre",
+    "switchToLight": "Passer au thème clair"
+  },
+  "language": {
+    "label": "Langue",
+    "ca": "Català",
+    "es": "Castellano",
+    "en": "English",
+    "fr": "Français"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "author": "Autrice"
+  },
+  "home": {
+    "tagline": "Apprends l'anglais en écrivant.",
+    "subtitle": "Écris un texte en anglais et reçois des corrections expliquées, comme les notes qu'un professeur écrit dans la marge.",
+    "ctaRegister": "Commence gratuitement",
+    "ctaLogin": "J'ai déjà un compte",
+    "privacy": "Le texte que tu écris est envoyé à un fournisseur d'IA pour être analysé. Tu peux supprimer ton compte et toutes tes données à tout moment.",
+    "features": {
+      "title": "Ce que tu trouveras",
+      "corrections": {
+        "title": "Des corrections qui enseignent",
+        "text": "Chaque erreur est accompagnée d'une courte explication dans ta langue, pas seulement de la réponse."
+      },
+      "level": {
+        "title": "Ton niveau, en un coup d'œil",
+        "text": "Nous estimons ton niveau (de A1 à C2) à chaque texte et suivons ta progression."
+      },
+      "practice": {
+        "title": "Une pratique sur mesure",
+        "text": "Des exercices créés à partir des erreurs que tu fais le plus souvent."
+      }
+    },
+    "demo": {
+      "title": "Essaie maintenant",
+      "subtitle": "Sans inscription. Jusqu'à 3 analyses par jour.",
+      "useSample": "Utiliser un exemple",
+      "sample": "Yesterday I go to the cinema with my friends. We watched a interesting film and I has enjoyed it very much.",
+      "cta": "Ça t'a plu ? Crée un compte pour enregistrer tes textes et suivre ta progression."
+    }
+  },
+  "auth": {
+    "fields": {
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "passwordHint": "Au moins 8 caractères.",
+      "displayName": "Nom"
+    },
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Ravi de te revoir.",
+      "submit": "Se connecter",
+      "switchPrompt": "Tu n'as pas encore de compte ?",
+      "switchLink": "Crée-en un"
+    },
+    "register": {
+      "title": "Crée ton compte",
+      "subtitle": "Gratuit, sans carte bancaire.",
+      "submit": "Créer le compte",
+      "switchPrompt": "Tu as déjà un compte ?",
+      "switchLink": "Connecte-toi"
+    }
+  },
+  "form": {
+    "showPassword": "Afficher le mot de passe",
+    "errors": {
+      "required": "Ce champ est obligatoire.",
+      "email": "Saisis une adresse e-mail valide.",
+      "minlength": "Il doit contenir au moins {{requiredLength}} caractères.",
+      "maxlength": "Il peut contenir au maximum {{requiredLength}} caractères."
+    }
+  },
+  "errors": {
+    "network": "Nous n'avons pas pu nous connecter. Vérifie ta connexion et réessaie.",
+    "unknown": "Une erreur s'est produite. Réessaie.",
+    "api": {
+      "validation_error": "Certaines données ne sont pas correctes. Vérifie-les et réessaie.",
+      "invalid_credentials": "L'e-mail ou le mot de passe est incorrect.",
+      "email_taken": "Un compte avec cet e-mail existe déjà.",
+      "unauthorized": "Ta session a expiré. Reconnecte-toi.",
+      "not_found": "Nous n'avons pas trouvé ce que tu cherchais.",
+      "rate_limit_exceeded": "Trop de tentatives d'affilée. Attends un instant et réessaie.",
+      "daily_quota_exceeded": "Tu as atteint la limite du jour. Reviens demain.",
+      "text_too_short": "Le texte est trop court (minimum {{min}} caractères).",
+      "text_too_long": "Le texte est trop long (maximum {{max}} caractères).",
+      "llm_unavailable": "Le service d'IA n'est pas disponible pour le moment. Réessaie dans un moment.",
+      "llm_invalid_response": "Nous n'avons pas pu comprendre la réponse de l'IA. Réessaie.",
+      "llm_capacity_reached": "Le service d'IA a atteint sa capacité quotidienne partagée. Réessaie demain.",
+      "exercise_already_attempted": "Cet exercice avait déjà été répondu."
+    }
+  },
+  "server": {
+    "waking": "Réveil du serveur… cela peut prendre jusqu'à une minute."
+  },
+  "toast": {
+    "close": "Fermer la notification"
+  },
+  "write": {
+    "title": "Écrire",
+    "welcome": "Salut, {{name}} !",
+    "titleLabel": "Titre (facultatif)",
+    "textLabel": "Ton texte en anglais",
+    "textPlaceholder": "Écris ton texte en anglais ici…",
+    "submit": "Corriger",
+    "analyzing": "Analyse de ton texte…",
+    "edit": "Modifier le texte",
+    "new": "Nouveau texte",
+    "tabs": {
+      "text": "Texte",
+      "corrections": "Corrections ({{count}})"
+    },
+    "result": {
+      "label": "Résultat de l'analyse",
+      "level": "Niveau estimé",
+      "words": "{{count}} mots",
+      "summary": "Note du professeur",
+      "noCorrections": "Aucune correction ! Ton texte est très bon.",
+      "corrections": "Corrections ({{count}})",
+      "hint": "Appuie sur une marque du texte pour voir sa correction.",
+      "applyAll": "Tout appliquer",
+      "apply": "Appliquer",
+      "undo": "Annuler",
+      "applied": "Appliquée",
+      "copy": "Copier le texte",
+      "copied": "Texte copié.",
+      "copyFailed": "Impossible de copier. Sélectionne le texte et copie-le manuellement.",
+      "original": "Original",
+      "betterSo": "Presque. Mieux comme ça :",
+      "rule": "Règle",
+      "detailTitle": "Correction"
+    }
+  },
+  "history": {
+    "title": "Historique",
+    "subtitle": "Tous les textes que tu as corrigés, du plus récent au plus ancien.",
+    "filter": {
+      "label": "Niveau",
+      "all": "Tous les niveaux"
+    },
+    "card": {
+      "words": "Mots : {{count}}",
+      "corrections": "Corrections : {{count}}"
+    },
+    "untitled": "Texte sans titre",
+    "pagination": {
+      "label": "Pages",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "status": "Page {{page}} sur {{pages}}"
+    },
+    "loading": "Chargement de tes textes…",
+    "loadFailed": "Nous n'avons pas pu charger tes textes.",
+    "retry": "Réessayer",
+    "empty": {
+      "title": "Tu n'as encore enregistré aucun texte",
+      "text": "Chaque texte que tu corriges est enregistré ici, pour que tu puisses le relire et voir tes progrès.",
+      "cta": "Écrire mon premier texte"
+    },
+    "emptyFiltered": {
+      "title": "Aucun texte de ce niveau",
+      "text": "Essaie un autre niveau, ou affiche-les tous.",
+      "clear": "Afficher tous les niveaux"
+    },
+    "detail": {
+      "back": "Retour à l'historique",
+      "writtenOn": "Écrit le {{date}}",
+      "delete": "Supprimer le texte",
+      "deleteTitle": "Supprimer ce texte ?",
+      "deleteMessage": "Le texte et ses corrections seront supprimés définitivement. Cette action est irréversible.",
+      "deleteConfirm": "Supprimer",
+      "deleted": "Texte supprimé.",
+      "notFound": {
+        "title": "Nous n'avons pas trouvé ce texte",
+        "text": "Il a peut-être été supprimé.",
+        "cta": "Retour à l'historique"
+      }
+    }
+  },
+  "practice": {
+    "title": "Pratiquer",
+    "subtitle": "Des exercices créés à partir des erreurs que tu fais le plus souvent.",
+    "loading": "Préparation de tes exercices…",
+    "loadFailed": "Nous n'avons pas pu charger tes exercices.",
+    "retry": "Réessayer",
+    "empty": {
+      "title": "Tu n'as pas encore d'exercices",
+      "text": "Écris et corrige d'abord un texte : les exercices sont créés à partir de tes propres erreurs.",
+      "cta": "Écrire mon premier texte"
+    },
+    "progress": "Exercice {{current}} sur {{total}}",
+    "answerLabel": "Ta réponse",
+    "check": "Vérifier",
+    "correct": "Correct !",
+    "incorrect": "Ce n'est pas ça.",
+    "correctAnswerWas": "La bonne réponse est : {{answer}}",
+    "continue": "Continuer",
+    "rule": "Règle",
+    "summary": {
+      "title": "Résumé de la session",
+      "score": "Tu as {{correct}} bonnes réponses sur {{total}}.",
+      "again": "Pratiquer davantage",
+      "done": "Retour à l'écriture"
+    }
+  },
+  "progress": {
+    "title": "Ta progression",
+    "subtitle": "Comment ton anglais évolue dans le temps.",
+    "loading": "Chargement de ta progression…",
+    "loadFailed": "Nous n'avons pas pu charger ta progression.",
+    "retry": "Réessayer",
+    "empty": {
+      "title": "Pas encore assez de données",
+      "text": "Écris et corrige quelques textes pour commencer à voir ta progression ici.",
+      "cta": "Écrire mon premier texte"
+    },
+    "kpis": {
+      "texts": "Textes",
+      "words": "Mots",
+      "errorsPer100": "Erreurs pour 100 mots",
+      "level": "Niveau actuel",
+      "streak": "Série",
+      "streakValue": "{{count}} jours"
+    },
+    "charts": {
+      "line": "Erreurs pour 100 mots au fil du temps",
+      "lineAlt": "Graphique en ligne des erreurs pour 100 mots par jour",
+      "donut": "Erreurs par catégorie",
+      "donutAlt": "Graphique circulaire montrant la répartition des erreurs par catégorie",
+      "donutEmpty": "Aucune erreur enregistrée pour le moment.",
+      "bar": "Règles les plus fréquentes",
+      "barAlt": "Graphique à barres des règles de correction les plus fréquentes",
+      "barEmpty": "Pas encore assez de données."
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "menu": "Sections des paramètres",
+    "sections": {
+      "profile": "Profil",
+      "preferences": "Apparence et langue",
+      "data": "Tes données",
+      "account": "Supprimer le compte"
+    },
+    "profile": {
+      "name": "Nom",
+      "targetLevel": "Niveau visé",
+      "targetLevelNone": "Non défini",
+      "targetLevelHint": "Le niveau que tu veux atteindre. Les corrections s'y adaptent.",
+      "save": "Enregistrer les modifications",
+      "saved": "Modifications enregistrées."
+    },
+    "preferences": {
+      "text": "Elles sont enregistrées dans ton compte et te suivent sur n'importe quel appareil."
+    },
+    "data": {
+      "text": "Télécharge une copie de tout ce que Marginalia enregistre à ton sujet (ton profil, tes textes et leurs corrections) dans un fichier JSON.",
+      "export": "Exporter mes données",
+      "exported": "Tes données ont été téléchargées."
+    },
+    "account": {
+      "text": "Supprime ton compte et tous tes textes. Cette action est irréversible.",
+      "delete": "Supprimer mon compte",
+      "confirmTitle": "Supprimer ton compte ?",
+      "confirmMessage": "Ton profil, tous tes textes et leurs corrections seront supprimés définitivement. Tu peux d'abord télécharger une copie de tes données.",
+      "confirmButton": "Oui, tout supprimer",
+      "deleted": "Ton compte a été supprimé."
+    }
+  },
+  "notFound": {
+    "title": "Cette page n'existe pas",
+    "text": "L'adresse est peut-être incorrecte, ou la page a été déplacée.",
+    "back": "Retour à l'accueil"
+  },
+  "categories": {
+    "grammar": "Grammaire",
+    "spelling": "Orthographe",
+    "vocabulary": "Vocabulaire",
+    "punctuation": "Ponctuation",
+    "style": "Style et registre"
+  },
+  "rules": {
+    "verb_tense": "Temps verbal",
+    "subject_verb_agreement": "Accord sujet-verbe",
+    "articles": "Articles",
+    "prepositions": "Prépositions",
+    "word_order": "Ordre des mots",
+    "plural_nouns": "Pluriels",
+    "pronouns": "Pronoms",
+    "modal_verbs": "Verbes modaux",
+    "conditionals": "Conditionnels",
+    "passive_voice": "Voix passive",
+    "phrasal_verbs": "Verbes à particule",
+    "collocations": "Collocations",
+    "false_friends": "Faux amis",
+    "spelling_common": "Fautes d'orthographe fréquentes",
+    "punctuation_commas": "Virgules et ponctuation",
+    "capitalization": "Majuscules",
+    "register_formal": "Registre soutenu",
+    "run_on_sentence": "Phrases sans coupure",
+    "other": "Autres"
+  }
+}

@@ -86,7 +86,7 @@ describe('PreferencesService', () => {
     it('does not save an unsupported language', async () => {
       const { preferences, backend, language } = await setup(true);
 
-      await preferences.setLanguage('fr');
+      await preferences.setLanguage('de');
 
       expect(language.language()).toBe('es');
       // The current (unchanged) language is what gets saved, never the invalid one.

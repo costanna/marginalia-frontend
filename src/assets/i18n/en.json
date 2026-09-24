@@ -33,7 +33,8 @@
     "label": "Language",
     "ca": "Català",
     "es": "Castellano",
-    "en": "English"
+    "en": "English",
+    "fr": "Français"
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -114,6 +115,7 @@
       "text_too_long": "The text is too long (maximum {{max}} characters).",
       "llm_unavailable": "The AI service isn't available right now. Please try again in a while.",
       "llm_invalid_response": "We couldn't understand the AI's response. Please try again.",
+      "llm_capacity_reached": "The AI service has reached its shared daily capacity. Please try again tomorrow.",
       "exercise_already_attempted": "This exercise has already been answered."
     }
   },

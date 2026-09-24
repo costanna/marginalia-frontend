@@ -40,7 +40,7 @@ describe('LanguageService', () => {
     it.each([
       [['ca-ES', 'es'], 'ca'],
       [['en-GB'], 'en'],
-      [['fr-FR', 'es-MX', 'en'], 'es'], // the first supported one, in the browser's order
+      [['de-DE', 'es-MX', 'en'], 'es'], // the first supported one, in the browser's order
       [['CA'], 'ca'], // case-insensitive
     ])('falls back to the browser language %j -> %s', async (browser, expected) => {
       setBrowserLanguages(browser);
@@ -52,7 +52,7 @@ describe('LanguageService', () => {
     });
 
     it('falls back to Spanish when nothing matches', async () => {
-      setBrowserLanguages(['fr-FR', 'de']);
+      setBrowserLanguages(['de-DE', 'it']);
       const { language } = setup();
 
       await language.initialize();
@@ -108,7 +108,7 @@ describe('LanguageService', () => {
       const { language } = setup();
       await language.initialize();
 
-      await language.setLanguage('fr');
+      await language.setLanguage('de');
 
       expect(language.language()).toBe('en');
       expect(localStorage.getItem(LANG_STORAGE_KEY)).toBeNull();

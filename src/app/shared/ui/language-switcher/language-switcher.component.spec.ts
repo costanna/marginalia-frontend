@@ -20,7 +20,7 @@ async function render(lang = 'es') {
 }
 
 describe('LanguageSwitcherComponent', () => {
-  it('offers the three languages, each named in its own language', async () => {
+  it('offers every supported language, each named in its own language', async () => {
     const { select } = await render();
 
     const options = [...select.options].map((option) => [option.value, option.textContent?.trim()]);
@@ -29,6 +29,7 @@ describe('LanguageSwitcherComponent', () => {
       ['ca', 'Català'],
       ['es', 'Castellano'],
       ['en', 'English'],
+      ['fr', 'Français'],
     ]);
   });
 
