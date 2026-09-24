@@ -12,6 +12,7 @@ export const API_ERROR_CODES = [
   'text_too_long',
   'llm_unavailable',
   'llm_invalid_response',
+  'llm_capacity_reached',
   'exercise_already_attempted',
 ] as const;
 

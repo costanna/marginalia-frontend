@@ -115,6 +115,7 @@
       "text_too_long": "Le texte est trop long (maximum {{max}} caractères).",
       "llm_unavailable": "Le service d'IA n'est pas disponible pour le moment. Réessaie dans un moment.",
       "llm_invalid_response": "Nous n'avons pas pu comprendre la réponse de l'IA. Réessaie.",
+      "llm_capacity_reached": "Le service d'IA a atteint sa capacité quotidienne partagée. Réessaie demain.",
       "exercise_already_attempted": "Cet exercice avait déjà été répondu."
     }
   },
