@@ -11,8 +11,18 @@ const valueOf = (source: string, key: string) =>
 
 /** A slip in vercel.json only shows up in production, so its important rules are pinned here. */
 describe('vercel.json', () => {
-  it('sends every route to index.html so a reload on /history does not 404', () => {
-    expect(vercel.rewrites).toEqual([{ source: '/(.*)', destination: '/index.html' }]);
+  const spaRewrite = vercel.rewrites[0];
+
+  it('sends app routes to index.html so a reload on /history does not 404', () => {
+    expect(spaRewrite.destination).toBe('/index.html');
+    expect(new RegExp(`^${spaRewrite.source}$`).test('/history')).toBe(true);
+  });
+
+  it('leaves static files alone, so a chunk missing after a deploy 404s instead of loading as HTML', () => {
+    // A stale tab asking for a chunk name from the previous build must get a real 404 (which
+    // ChunkErrorHandler reacts to), not index.html served as if it were a JS module.
+    expect(new RegExp(`^${spaRewrite.source}$`).test('/chunk-ABC123.js')).toBe(false);
+    expect(new RegExp(`^${spaRewrite.source}$`).test('/assets/i18n/es.json')).toBe(false);
   });
 
   it('sets the basic security headers on every response', () => {
